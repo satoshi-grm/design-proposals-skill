@@ -1,0 +1,16 @@
+html, body { width: var(--vw); height: var(--vh); overflow: hidden; }
+.app { display: grid; grid-template-columns: 220px 1fr; height: var(--vh); }
+.side { background: var(--sidebar); color: var(--sidebar-foreground); border-right: 1px solid var(--sidebar-border); padding: 16px 12px; display: grid; align-content: start; gap: 16px; }
+.nav { display: grid; gap: 2px; } .nav a { display: flex; align-items: center; gap: 10px; height: 34px; padding: 0 10px; border-radius: var(--radius); color: var(--sidebar-muted); }
+.nav a[aria-current] { background: var(--sidebar-accent); color: var(--sidebar-accent-foreground); } .nav .count { margin-left: auto; font-family: var(--font-mono); font-size: 12px; }
+.main { display: flex; flex-direction: column; } .top { display: flex; align-items: center; height: 56px; padding: 0 24px; border-bottom: 1px solid var(--border); }
+.cuerpo { padding: 32px; display: grid; gap: 8px; align-content: start; } .lista { margin-top: 20px; border-top: 1px solid var(--border); }
+.fila { display: flex; align-items: center; gap: 16px; height: var(--row-h); border-bottom: 1px solid var(--border); } .fila .badge { margin-left: auto; }
+/* celular */
+.m { display: flex; flex-direction: column; height: var(--vh); background: var(--background); color: var(--foreground); }
+.m-top { display: flex; align-items: center; justify-content: space-between; height: 56px; padding: 0 20px; border-bottom: 1px solid var(--border); }
+.m-cuerpo { padding: 24px 20px; display: grid; gap: 12px; align-content: start; flex: 1; }
+.m-hora { font-family: var(--font-mono); font-size: 40px; font-weight: 500; }
+.m-auto { font-size: 20px; font-weight: 600; } .m-lista { margin-top: 12px; border-top: 1px solid var(--border); }
+.m-lista .fila { font-size: 15px; } .m-pie { padding: 16px 20px 28px; display: grid; }
+.m-pie .btn { height: 48px; justify-content: center; font-size: 16px; }

@@ -1,0 +1,9 @@
+/* Firma de «Pizarra de turnos»: barra oscura, bordes rectos y el turno en curso subrayado en naranja */
+[data-dir="pizarra"] .side .h3 { text-transform: uppercase; letter-spacing: 0.08em; font-size: 13px; }
+[data-dir="pizarra"] .fila { height: 40px; }
+[data-dir="pizarra"] .fila.ahora { box-shadow: inset 0 -3px 0 var(--primary); font-weight: 600; }
+[data-dir="pizarra"] .fila .mono { color: var(--accent-ink); }
+[data-dir="pizarra"] .h1 { text-transform: uppercase; letter-spacing: 0.02em; }
+[data-dir="pizarra"] .m-top { background: var(--sidebar); color: var(--sidebar-foreground); }
+[data-dir="pizarra"] .m-top .muted { color: var(--sidebar-muted); }
+[data-dir="pizarra"] .m-hora { box-shadow: inset 0 -6px 0 var(--primary); display: inline-block; justify-self: start; line-height: 1; padding-bottom: 10px; margin-bottom: 6px; }

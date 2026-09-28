@@ -1,0 +1,274 @@
+{
+ "titulo": "Direcciones visuales de Taller Sur",
+ "proyecto": "Taller Sur",
+ "fecha": "2026-01-01",
+ "version": "v1",
+ "contexto": "Agenda de turnos de un taller mecánico: el mostrador en la compu y el mecánico en el celular. Producto inventado para el ejemplo de la skill.",
+ "fijo": [
+  "Mismas pantallas y mismos datos",
+  "Un solo color de acción",
+  "Estados con punto y texto"
+ ],
+ "varia": [
+  "Color y temperatura",
+  "Tipografía",
+  "Forma y densidad"
+ ],
+ "como_leer": "Dos direcciones, dos pantallas: el panel del mostrador y el celular del mecánico. Mirá primero dónde se va el ojo en cada una.",
+ "css": [
+  "pantallas.css"
+ ],
+ "componentes_pantallas": [
+  "base.css"
+ ],
+ "google_fonts": [
+  "Instrument Sans:400;500;600",
+  "IBM Plex Mono:400;500",
+  "Space Grotesk:400;500;600",
+  "JetBrains Mono:400;500"
+ ],
+ "pantallas": [
+  {
+   "id": "panel",
+   "archivo": "pantallas/panel.html",
+   "ancho": 1440,
+   "alto": 900,
+   "nombre": "Turnos de hoy",
+   "nota": "Panel · 1440 × 900"
+  },
+  {
+   "id": "movil",
+   "archivo": "pantallas/movil.html",
+   "ancho": 390,
+   "alto": 844,
+   "nombre": "Mi próximo turno",
+   "nota": "Celular · 390 × 844"
+  }
+ ],
+ "direcciones": [
+  {
+   "id": "banco",
+   "nombre": "Banco de trabajo",
+   "frase": "Herramientas colgadas en su lugar.",
+   "idea": "El tablero perforado del taller: todo a la vista y en su lugar.",
+   "firma": "La hora de cada turno como etiqueta de herramienta.",
+   "fuentes": [
+    "Instrument Sans",
+    "IBM Plex Mono"
+   ],
+   "referencias": "Linear, Stripe",
+   "ejes": {
+    "temperatura": "Neutra",
+    "densidad": "Media",
+    "tipografia": "Instrument Sans + IBM Plex Mono",
+    "forma": "Radio 6 px",
+    "imagen": "Sin fotos",
+    "movimiento": "Mínimo"
+   },
+   "a_favor": [
+    "Se lee de un vistazo desde el mostrador",
+    "El azul marca solo la acción y la hora"
+   ],
+   "en_contra": [
+    "Sobria: no se distingue mucho de otras agendas"
+   ],
+   "modo": "light",
+   "tokens": {
+    "light": {
+     "background": "#F4F3F0",
+     "foreground": "#1B1B19",
+     "card": "#FFFFFF",
+     "muted": "#EAE8E3",
+     "muted-foreground": "#5B5953",
+     "primary": "#1F5FA8",
+     "primary-foreground": "#FFFFFF",
+     "accent-ink": "#1F5FA8",
+     "border": "#DEDBD4",
+     "input": "#8A877F",
+     "ring": "#1F5FA8",
+     "destructive": "#B3261E",
+     "success": "#2F6F47",
+     "warning": "#8A5A00",
+     "info": "#1F5FA8",
+     "sidebar": "#ECEAE5",
+     "sidebar-foreground": "#1B1B19",
+     "sidebar-muted": "#5B5953",
+     "sidebar-accent": "#FFFFFF",
+     "sidebar-accent-foreground": "#1B1B19",
+     "sidebar-border": "#DEDBD4",
+     "font-sans": "'Instrument Sans', sans-serif",
+     "font-display": "'Instrument Sans', sans-serif",
+     "font-mono": "'IBM Plex Mono', monospace",
+     "radius": "6px"
+    },
+    "dark": {
+     "background": "#141413",
+     "foreground": "#ECEAE5",
+     "card": "#1D1D1B",
+     "muted": "#262624",
+     "muted-foreground": "#A5A39C",
+     "primary": "#6AA6F0",
+     "primary-foreground": "#141413",
+     "accent-ink": "#6AA6F0",
+     "border": "#302F2C",
+     "input": "#76746D",
+     "ring": "#6AA6F0",
+     "destructive": "#FF7A66",
+     "success": "#6CC08A",
+     "warning": "#E7B454",
+     "info": "#6AA6F0",
+     "sidebar": "#141413",
+     "sidebar-foreground": "#ECEAE5",
+     "sidebar-muted": "#A5A39C",
+     "sidebar-accent": "#262624",
+     "sidebar-accent-foreground": "#ECEAE5",
+     "sidebar-border": "#302F2C"
+    }
+   },
+   "notas": {
+    "panel": [
+     "La hora de cada turno es una etiqueta azul: se encuentra antes que el auto."
+    ]
+   }
+  },
+  {
+   "id": "pizarra",
+   "nombre": "Pizarra de turnos",
+   "frase": "Lo que está escrito con tiza en la pared del taller.",
+   "idea": "La agenda como la pizarra del jefe de taller: barra oscura, bordes rectos y el turno en curso subrayado en naranja óxido.",
+   "firma": "El turno en curso lleva un subrayado grueso naranja, como una marca de tiza.",
+   "fuentes": [
+    "Space Grotesk",
+    "JetBrains Mono"
+   ],
+   "referencias": "Linear, Raycast",
+   "ejes": {
+    "temperatura": "Cálida",
+    "densidad": "Alta",
+    "tipografia": "Space Grotesk + JetBrains Mono",
+    "forma": "Recta, radio 2 px",
+    "imagen": "Sin fotos",
+    "movimiento": "Mínimo"
+   },
+   "a_favor": [
+    "Tiene carácter de oficio sin disfrazarse",
+    "Más filas por pantalla"
+   ],
+   "en_contra": [
+    "La barra oscura pesa en pantallas chicas"
+   ],
+   "modo": "light",
+   "notas": {
+    "panel": [
+     "Barra oscura como la pared; el turno en curso subrayado es lo primero que se ve."
+    ]
+   },
+   "tokens": {
+    "light": {
+     "background": "#F2EFE9",
+     "foreground": "#1C1A17",
+     "card": "#FBFAF7",
+     "muted": "#E6E1D8",
+     "muted-foreground": "#5A544B",
+     "primary": "#B8431C",
+     "primary-foreground": "#FFFFFF",
+     "accent-ink": "#A33A17",
+     "border": "#D9D2C5",
+     "input": "#8C8477",
+     "ring": "#B8431C",
+     "destructive": "#A8231C",
+     "success": "#2E6B3E",
+     "warning": "#835400",
+     "info": "#2D5B8A",
+     "sidebar": "#1F1D1A",
+     "sidebar-foreground": "#EFEAE0",
+     "sidebar-muted": "#B3AB9C",
+     "sidebar-accent": "#34302A",
+     "sidebar-accent-foreground": "#FFFFFF",
+     "sidebar-border": "#34302A",
+     "font-sans": "'Space Grotesk', sans-serif",
+     "font-display": "'Space Grotesk', sans-serif",
+     "font-mono": "'JetBrains Mono', monospace",
+     "radius": "2px",
+     "radius-sm": "2px",
+     "radius-lg": "4px",
+     "display-weight": "600",
+     "display-tracking": "-0.02em"
+    },
+    "dark": {
+     "background": "#161412",
+     "foreground": "#EFEAE0",
+     "card": "#1F1C19",
+     "muted": "#2A2622",
+     "muted-foreground": "#ABA392",
+     "primary": "#F07A4A",
+     "primary-foreground": "#161412",
+     "accent-ink": "#F07A4A",
+     "border": "#34302A",
+     "input": "#7D7568",
+     "ring": "#F07A4A",
+     "destructive": "#FF7A66",
+     "success": "#6CC08A",
+     "warning": "#E7B454",
+     "info": "#7FB0E6",
+     "sidebar": "#110F0E",
+     "sidebar-foreground": "#EFEAE0",
+     "sidebar-muted": "#ABA392",
+     "sidebar-accent": "#2A2622",
+     "sidebar-accent-foreground": "#FFFFFF",
+     "sidebar-border": "#2A2622"
+    }
+   }
+  }
+ ],
+ "comparativa": {
+  "columnas": [
+   "Carácter",
+   "Densidad",
+   "Legibilidad"
+  ],
+  "valores": {
+   "banco": [
+    "Ordenada, neutra",
+    3,
+    5
+   ],
+   "pizarra": [
+    "De oficio, cálida",
+    4,
+    4
+   ]
+  },
+  "nota": "Puntos de 1 a 5, a ojo, con los mismos datos en las dos."
+ },
+ "mezcla_regla": "Se mezcla composición de una con color de otra; nunca dos acentos.",
+ "mezclas": [
+  {
+   "titulo": "Banco con la barra de Pizarra",
+   "texto": "La claridad de Banco con la barra oscura y el subrayado del turno en curso.",
+   "imgs": [
+    "banco-panel",
+    "pizarra-panel"
+   ]
+  }
+ ],
+ "recomendacion": {
+  "base": "pizarra",
+  "base_nombre": "Pizarra de turnos",
+  "titulo": "Pizarra de turnos",
+  "resumen": "Tiene carácter propio y muestra más turnos sin perder lectura.",
+  "porque": [
+   "El turno en curso se encuentra en un segundo.",
+   "Se diferencia de cualquier agenda genérica.",
+   "Pasa AA en claro y en oscuro."
+  ],
+  "alternativa": "si el taller atiende mucho público en el mostrador, Banco es más calma.",
+  "pasos": [
+   "Pegar pizarra/tokens.css en la hoja global.",
+   "Copiar la firma de direcciones/pizarra.css.",
+   "Reproducir las dos pantallas con los componentes del proyecto."
+  ],
+  "pregunta": "¿Cuál elegís, o mezclamos? (recomendada: Pizarra de turnos)"
+ },
+ "datos_ficticios": "Taller Sur es inventado; turnos, autos y nombres también."
+}
