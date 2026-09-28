@@ -1,0 +1,556 @@
+{
+ "lang": "en",
+ "title": "Visual directions for Nocturne",
+ "project": "Nocturne",
+ "date": "2026-09-27",
+ "version": "v1",
+ "context": "Nocturne is an independent cinema with three auditoriums. Staff plan the day's programming on a desktop dashboard, the audience buys seats on their phone and the lobby TV shows tonight's films. Made-up product for the skill's example.",
+ "fixed": [
+  "Same three screens and the same data in every direction",
+  "One accent color per direction",
+  "Status is always a dot or icon plus text",
+  "Contrast AA in light and dark"
+ ],
+ "varies": [
+  "Color temperature and mode",
+  "Typography pairing",
+  "Density and shape",
+  "Role of photography"
+ ],
+ "how_to_read": "Three directions, three screens: the programming dashboard, the seat picker on a phone and the lobby TV. Start with the lobby from across the room, then check how fast you find the sold-out session on the dashboard.",
+ "fictional_data": "Nocturne, its auditoriums, occupancy, prices and «Salt Hours» (and its director) are made up. The classic films are public domain; showtimes are invented. Photos from Unsplash.",
+ "css": [
+  "screens.css"
+ ],
+ "screen_components": [
+  "base.css"
+ ],
+ "google_fonts": [
+  "Fraunces:400;500;600",
+  "Instrument Sans:400;500;600",
+  "DM Mono:400;500",
+  "Hanken Grotesk:400;500;600;700",
+  "IBM Plex Mono:400;500;600",
+  "Archivo:400;500;600;700;800",
+  "JetBrains Mono:400;500;600"
+ ],
+ "screens": [
+  {
+   "id": "dashboard",
+   "file": "screens/dashboard.html",
+   "width": 1440,
+   "height": 900,
+   "name": "Programming · today",
+   "note": "Dashboard · 1440 × 900",
+   "page": "panel"
+  },
+  {
+   "id": "mobile",
+   "file": "screens/mobile.html",
+   "width": 390,
+   "height": 844,
+   "name": "Your ticket",
+   "note": "Phone · 390 × 844",
+   "page": "mobile"
+  },
+  {
+   "id": "lobby",
+   "file": "screens/lobby.html",
+   "width": 1920,
+   "height": 1080,
+   "name": "Tonight",
+   "note": "Lobby TV · 1920 × 1080",
+   "page": "tv"
+  }
+ ],
+ "photos": [
+  {
+   "file": "photos/auditorium.jpg",
+   "unsplash_id": "1595769816263-9b910be24d5f",
+   "url": "https://unsplash.com/photos/1595769816263-9b910be24d5f"
+  },
+  {
+   "file": "photos/projector.jpg",
+   "unsplash_id": "1478720568477-152d9b164e26",
+   "url": "https://unsplash.com/photos/1478720568477-152d9b164e26"
+  },
+  {
+   "file": "photos/seats.jpg",
+   "unsplash_id": "1513106580091-1d82408b8cd6",
+   "url": "https://unsplash.com/photos/1513106580091-1d82408b8cd6"
+  },
+  {
+   "file": "photos/aisle.jpg",
+   "unsplash_id": "1489599849927-2ee91cede3ba",
+   "url": "https://unsplash.com/photos/1489599849927-2ee91cede3ba"
+  }
+ ],
+ "directions": [
+  {
+   "id": "marquee",
+   "name": "Marquee",
+   "tagline": "The lights go down, the picture takes over.",
+   "idea": "A late-night film programme: warm darkness, a serif that feels printed, and the photograph always leading. Gold is used once per screen, like the bulbs on a marquee.",
+   "signature": "Film titles set large in Fraunces over a full-bleed still that fades into the room.",
+   "fonts": [
+    "Fraunces",
+    "Instrument Sans",
+    "DM Mono"
+   ],
+   "references": "Mubi, A24, Criterion Channel",
+   "axes": {
+    "temperature": "Warm, dark",
+    "density": "Airy",
+    "typography": "Fraunces display + Instrument Sans",
+    "shape": "Soft, radius 10 px",
+    "imagery": "Large photos that lead each screen",
+    "motion": "Minimal: slow fades only"
+   },
+   "pros": [
+    "Feels like a cinema, not a spreadsheet",
+    "The lobby board reads as part of the building",
+    "Dark mode is the natural state for a screening room"
+   ],
+   "cons": [
+    "Fewer rows per screen on the dashboard",
+    "Depends on good photography for every film"
+   ],
+   "mode": "dark",
+   "tokens": {
+    "light": {
+     "background": "#F6F1E9",
+     "foreground": "#1E1914",
+     "card": "#FFFCF7",
+     "muted": "#ECE4D8",
+     "muted-foreground": "#62574A",
+     "primary": "#7A4E10",
+     "primary-foreground": "#FFFCF7",
+     "accent-ink": "#7A4E10",
+     "border": "#E0D6C7",
+     "input": "#8F8272",
+     "ring": "#7A4E10",
+     "destructive": "#A8321F",
+     "success": "#2F6A3E",
+     "warning": "#8A4B00",
+     "info": "#2E5A86",
+     "sidebar": "#EFE7DB",
+     "sidebar-foreground": "#1E1914",
+     "sidebar-muted": "#5E5346",
+     "sidebar-accent": "#FFFCF7",
+     "sidebar-accent-foreground": "#1E1914",
+     "sidebar-border": "#E0D6C7",
+     "font-sans": "'Instrument Sans', sans-serif",
+     "font-display": "'Fraunces', serif",
+     "font-mono": "'DM Mono', monospace",
+     "radius": "10px",
+     "radius-sm": "6px",
+     "radius-lg": "16px",
+     "display-weight": "500",
+     "display-tracking": "-0.02em",
+     "control-h": "36px",
+     "row-h": "48px"
+    },
+    "dark": {
+     "background": "#14110E",
+     "foreground": "#F3EBDF",
+     "card": "#1D1915",
+     "muted": "#2A241E",
+     "muted-foreground": "#AA9E8E",
+     "primary": "#E3AE5B",
+     "primary-foreground": "#1A1208",
+     "accent-ink": "#E9B769",
+     "border": "#352D25",
+     "input": "#7D7061",
+     "ring": "#E9B769",
+     "destructive": "#FF8B78",
+     "success": "#8FCB95",
+     "warning": "#F3A05E",
+     "info": "#8DB8E8",
+     "sidebar": "#0F0D0B",
+     "sidebar-foreground": "#F3EBDF",
+     "sidebar-muted": "#A3978A",
+     "sidebar-accent": "#2A241E",
+     "sidebar-accent-foreground": "#F3EBDF",
+     "sidebar-border": "#2A241E"
+    }
+   },
+   "extra_pairs": [
+    [
+     "info",
+     "card",
+     "text"
+    ],
+    [
+     "warning",
+     "card",
+     "text"
+    ],
+    [
+     "muted-foreground",
+     "muted",
+     "text"
+    ],
+    [
+     "accent-ink",
+     "muted",
+     "text"
+    ]
+   ],
+   "notes": {
+    "dashboard": [
+     "The selected film opens with its still at full width; the timeline stays quiet until you pick a session.",
+     "Gold marks only the selected session and the primary action."
+    ],
+    "mobile": [
+     "The film still sits behind the header, so buying a seat still feels like going to the movies.",
+     "Selected seats are gold; taken seats simply recede."
+    ],
+    "lobby": [
+     "Half the board is the room itself; titles in Fraunces read like a printed programme from across the lobby."
+    ]
+   }
+  },
+  {
+   "id": "ticket-stub",
+   "name": "Ticket Stub",
+   "tagline": "Admit one. Keep this part.",
+   "idea": "The paper side of cinema: cream stock, black ink, times printed in monospace and a perforated edge where you tear. Everything fits, nothing decorates.",
+   "signature": "Perforated edges and monospace times, as if every session were a printed stub.",
+   "fonts": [
+    "Hanken Grotesk",
+    "IBM Plex Mono"
+   ],
+   "references": "Linear, Teenage Engineering, cinema ticket stock",
+   "axes": {
+    "temperature": "Neutral-warm paper",
+    "density": "Dense",
+    "typography": "Hanken Grotesk + IBM Plex Mono for times",
+    "shape": "Square, radius 2 px, dashed rules",
+    "imagery": "No photos",
+    "motion": "None beyond hover"
+   },
+   "pros": [
+    "Most sessions per screen: the whole day fits without scrolling",
+    "Times in monospace line up and scan fast",
+    "Cheap to build: no photography needed"
+   ],
+   "cons": [
+    "Less emotional on the public screens",
+    "Paper texture can look dated if overused"
+   ],
+   "mode": "light",
+   "tokens": {
+    "light": {
+     "background": "#EFE8DA",
+     "foreground": "#15130F",
+     "card": "#F9F5EC",
+     "muted": "#E4DCCB",
+     "muted-foreground": "#564E41",
+     "primary": "#2437A8",
+     "primary-foreground": "#FFFFFF",
+     "accent-ink": "#2437A8",
+     "border": "#CFC5B1",
+     "input": "#857B69",
+     "ring": "#2437A8",
+     "destructive": "#A82A1A",
+     "success": "#2D6435",
+     "warning": "#834A00",
+     "info": "#2437A8",
+     "sidebar": "#E6DECE",
+     "sidebar-foreground": "#15130F",
+     "sidebar-muted": "#544C3F",
+     "sidebar-accent": "#15130F",
+     "sidebar-accent-foreground": "#F9F5EC",
+     "sidebar-border": "#CFC5B1",
+     "font-sans": "'Hanken Grotesk', sans-serif",
+     "font-display": "'Hanken Grotesk', sans-serif",
+     "font-mono": "'IBM Plex Mono', monospace",
+     "radius": "2px",
+     "radius-sm": "1px",
+     "radius-lg": "3px",
+     "display-weight": "700",
+     "display-tracking": "-0.01em",
+     "control-h": "30px",
+     "row-h": "34px"
+    },
+    "dark": {
+     "background": "#17150F",
+     "foreground": "#EFE8DA",
+     "card": "#201D16",
+     "muted": "#2C281F",
+     "muted-foreground": "#ADA392",
+     "primary": "#9AA8FF",
+     "primary-foreground": "#101226",
+     "accent-ink": "#9AA8FF",
+     "border": "#3A342A",
+     "input": "#7E7565",
+     "ring": "#9AA8FF",
+     "destructive": "#FF8A76",
+     "success": "#86C98C",
+     "warning": "#E9B05C",
+     "info": "#9AA8FF",
+     "sidebar": "#12100C",
+     "sidebar-foreground": "#EFE8DA",
+     "sidebar-muted": "#A89E8D",
+     "sidebar-accent": "#EFE8DA",
+     "sidebar-accent-foreground": "#15130F",
+     "sidebar-border": "#2C281F"
+    }
+   },
+   "extra_pairs": [
+    [
+     "warning",
+     "card",
+     "text"
+    ],
+    [
+     "info",
+     "card",
+     "text"
+    ],
+    [
+     "muted-foreground",
+     "muted",
+     "text"
+    ],
+    [
+     "foreground",
+     "muted",
+     "text"
+    ]
+   ],
+   "notes": {
+    "dashboard": [
+     "All ten sessions and the timeline fit on one screen; the film detail is a stub with a perforated edge.",
+     "Blue ink appears only on the selected session and the primary button."
+    ],
+    "mobile": [
+     "The ticket is the screen: a tear line separates the seat map from the stub you keep."
+    ],
+    "lobby": [
+     "A printed board: each session is a stub, times in monospace, the screen number in a box."
+    ]
+   }
+  },
+  {
+   "id": "projector",
+   "name": "Projector",
+   "tagline": "Big type, hard light, no guessing.",
+   "idea": "Signage first: a cold, high-contrast system of solid blocks and one electric blue, built to be read from the back of the lobby and reused on the dashboard.",
+   "signature": "Screen numbers as solid square blocks, and heavy Archivo set tight at signage size.",
+   "fonts": [
+    "Archivo",
+    "JetBrains Mono"
+   ],
+   "references": "Raycast, transit signage, Vercel",
+   "axes": {
+    "temperature": "Cold",
+    "density": "Medium",
+    "typography": "Archivo ExtraBold display + JetBrains Mono",
+    "shape": "Hard, radius 0, solid blocks",
+    "imagery": "Grayscale photo as one block",
+    "motion": "Snappy: 120 ms cuts"
+   },
+   "pros": [
+    "Best legibility at distance: the lobby board works from 10 m",
+    "Screen numbers become wayfinding the building can reuse",
+    "Very clear status at a glance"
+   ],
+   "cons": [
+    "Cold for a neighbourhood cinema",
+    "Blocks can feel loud on a staff tool used all day"
+   ],
+   "mode": "light",
+   "tokens": {
+    "light": {
+     "background": "#EEF0F3",
+     "foreground": "#0A0C10",
+     "card": "#FFFFFF",
+     "muted": "#E1E5EA",
+     "muted-foreground": "#474F5C",
+     "primary": "#0044F0",
+     "primary-foreground": "#FFFFFF",
+     "accent-ink": "#0038C7",
+     "border": "#CDD3DB",
+     "input": "#7B8491",
+     "ring": "#0044F0",
+     "destructive": "#C0182B",
+     "success": "#11703C",
+     "warning": "#8F4E00",
+     "info": "#0038C7",
+     "sidebar": "#0A0C10",
+     "sidebar-foreground": "#FFFFFF",
+     "sidebar-muted": "#A7AFBC",
+     "sidebar-accent": "#0044F0",
+     "sidebar-accent-foreground": "#FFFFFF",
+     "sidebar-border": "#1E232B",
+     "font-sans": "'Archivo', sans-serif",
+     "font-display": "'Archivo', sans-serif",
+     "font-mono": "'JetBrains Mono', monospace",
+     "radius": "0px",
+     "radius-sm": "0px",
+     "radius-lg": "0px",
+     "display-weight": "800",
+     "display-tracking": "-0.035em",
+     "control-h": "36px",
+     "row-h": "42px"
+    },
+    "dark": {
+     "background": "#07090C",
+     "foreground": "#F4F6F9",
+     "card": "#10141A",
+     "muted": "#1B2029",
+     "muted-foreground": "#9AA3B1",
+     "primary": "#5B8CFF",
+     "primary-foreground": "#04060A",
+     "accent-ink": "#7AA2FF",
+     "border": "#262C36",
+     "input": "#6B7481",
+     "ring": "#7AA2FF",
+     "destructive": "#FF6F7D",
+     "success": "#4FD18B",
+     "warning": "#FFB547",
+     "info": "#7AA2FF",
+     "sidebar": "#000000",
+     "sidebar-foreground": "#FFFFFF",
+     "sidebar-muted": "#A7AFBC",
+     "sidebar-accent": "#5B8CFF",
+     "sidebar-accent-foreground": "#04060A",
+     "sidebar-border": "#1B2029"
+    }
+   },
+   "extra_pairs": [
+    [
+     "warning",
+     "card",
+     "text"
+    ],
+    [
+     "info",
+     "card",
+     "text"
+    ],
+    [
+     "muted-foreground",
+     "muted",
+     "text"
+    ],
+    [
+     "sidebar-accent-foreground",
+     "sidebar-accent",
+     "text"
+    ],
+    [
+     "background",
+     "destructive",
+     "text"
+    ],
+    [
+     "background",
+     "warning",
+     "text"
+    ],
+    [
+     "background",
+     "success",
+     "text"
+    ]
+   ],
+   "notes": {
+    "dashboard": [
+     "The black rail and blue blocks make the tool feel like the building's signage.",
+     "Timeline sessions are solid blocks; the selected one turns blue."
+    ],
+    "mobile": [
+     "Seat map with square seats and a heavy total; the pay button is the only blue on screen besides your seats."
+    ],
+    "lobby": [
+     "Black board, screen numbers as big blue squares, times at 64 px: readable from the door."
+    ]
+   }
+  }
+ ],
+ "comparison": {
+  "columns": [
+   "Character",
+   "Density",
+   "Reads at distance",
+   "Needs photography"
+  ],
+  "values": {
+   "marquee": [
+    "Warm, editorial",
+    2,
+    4,
+    5
+   ],
+   "ticket-stub": [
+    "Paper, precise",
+    5,
+    3,
+    1
+   ],
+   "projector": [
+    "Cold, signage",
+    3,
+    5,
+    2
+   ]
+  },
+  "note": "Dots from 1 to 5, judged by eye with the same data in all three."
+ },
+ "mix_rule": "Mix one direction's composition with another's type or density; never two accent colors on the same screen.",
+ "mixes": [
+  {
+   "title": "Ticket Stub for staff, Marquee for the audience",
+   "text": "The dense paper dashboard for the people who program, with Marquee's photos and serif on the phone and in the lobby. Share the gold accent so the brand stays one.",
+   "images": [
+    "ticket-stub-dashboard",
+    "marquee-lobby"
+   ]
+  },
+  {
+   "title": "Marquee with Projector's screen blocks",
+   "text": "Keep Marquee's warmth and photography, but borrow the solid screen-number squares as wayfinding.",
+   "images": [
+    "marquee-lobby",
+    "projector-lobby"
+   ]
+  },
+  {
+   "title": "Ticket Stub seat map in Marquee colors",
+   "text": "The tear line and monospace seat labels from Ticket Stub, on Marquee's dark warm palette for evening buyers.",
+   "images": [
+    "ticket-stub-mobile",
+    "marquee-mobile"
+   ]
+  },
+  {
+   "title": "Projector dashboard with Marquee's detail panel",
+   "text": "Projector's hard timeline blocks for scanning, with Marquee's photo-led film panel on the right.",
+   "images": [
+    "projector-dashboard",
+    "marquee-dashboard"
+   ]
+  }
+ ],
+ "recommendation": {
+  "base": "marquee",
+  "base_name": "Marquee",
+  "title": "Marquee, with Ticket Stub density on the dashboard",
+  "summary": "Marquee is the one that feels like Nocturne: the photograph and the serif carry the brand onto the phone and the lobby, and the dark base suits a cinema. Tighten the dashboard with Ticket Stub's row height.",
+  "why": [
+   "The audience-facing screens (phone and lobby) are where the brand is felt, and Marquee wins both.",
+   "The sold-out session is still found in one glance: gold selection, rose status with text.",
+   "Passes AA in light and dark; dark is the default after 18:00."
+  ],
+  "alternative": "if the lobby TV is the priority and there is no budget for film stills, Projector is the safer choice.",
+  "steps": [
+   "Paste marquee/tokens.css into the global stylesheet.",
+   "Copy the signature from directions/marquee.css (photo-led detail panel and title treatment).",
+   "Set --row-h to 36px on the dashboard only.",
+   "Rebuild the three screens with the project's components."
+  ],
+  "question": "Which one do you pick, or shall we mix? (recommended: Marquee)"
+ }
+}

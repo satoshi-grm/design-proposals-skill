@@ -1,0 +1,133 @@
+/* ==========================================================================
+   overlays.css · floating things
+   .scrim (modal backdrop, flat translucent color, no blur)
+   .cmdk (⌘K command bar) · .dialog (+ --danger) · .sheet · .toast-stack > .toast
+   Floating things get --shadow-float and at most 1 px of --border.
+   ========================================================================== */
+
+.scrim { background: var(--scrim, color-mix(in oklab, var(--foreground) 38%, transparent)); }
+[data-mode="dark"] .scrim { background: var(--scrim, color-mix(in oklab, var(--background) 70%, transparent)); }
+
+.float {
+  background: var(--popover); color: var(--popover-foreground);
+  border: 1px solid var(--border); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-float);
+}
+
+/* ---------- Command bar ---------- */
+.cmdk {
+  display: flex; flex-direction: column; width: 100%; max-width: 560px; overflow: hidden;
+  background: var(--popover); color: var(--popover-foreground);
+  border: 1px solid var(--border); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-float);
+  animation: overlay-in var(--dur-med) var(--ease-out) both;
+}
+.cmdk__input {
+  display: flex; align-items: center; gap: 10px; height: 52px; padding: 0 12px 0 16px;
+  border-bottom: 1px solid var(--border);
+}
+.cmdk__input > .i { width: 18px; height: 18px; color: var(--muted-foreground); }
+.cmdk__input input {
+  flex: 1; min-width: 0; height: 100%; border: 0; outline: 0; background: transparent;
+  font-size: var(--text-md); color: var(--foreground);
+}
+.cmdk__input input::placeholder { color: var(--muted-foreground); }
+.cmdk__list { padding: 4px 6px 6px; }
+.cmdk__group + .cmdk__group { margin-top: 2px; padding-top: 2px; border-top: 1px solid var(--border); }
+.cmdk__label { display: flex; align-items: center; height: 30px; padding: 0 10px; font-size: var(--text-xs); color: var(--muted-foreground); }
+.cmdk__item {
+  display: flex; align-items: center; gap: 12px; height: 36px; padding: 0 10px;
+  border-radius: var(--radius-sm); font-size: var(--text-base); color: var(--foreground); cursor: pointer;
+}
+.cmdk__item > .i { width: 16px; height: 16px; color: var(--muted-foreground); }
+.cmdk__item mark { background: transparent; color: inherit; font-weight: 600; text-decoration: underline; text-decoration-color: color-mix(in oklab, var(--accent-ink) 55%, transparent); text-underline-offset: 3px; }
+.cmdk__meta { margin-left: auto; display: inline-flex; align-items: center; gap: 4px; font-size: var(--text-xs); color: var(--muted-foreground); }
+.cmdk__item[aria-selected="true"] { background: var(--accent); color: var(--accent-foreground); }
+.cmdk__item[aria-selected="true"] > .i { color: var(--accent-ink); }
+.cmdk__foot {
+  display: flex; align-items: center; gap: 16px; height: 40px; padding: 0 14px;
+  border-top: 1px solid var(--border); background: var(--card);
+  font-size: var(--text-xs); color: var(--muted-foreground);
+}
+.cmdk__foot span { display: inline-flex; align-items: center; gap: 6px; }
+.cmdk__foot .spacer { flex: 1; }
+
+/* ---------- Modal dialog ---------- */
+.dialog {
+  display: flex; flex-direction: column; width: 100%; max-width: 440px; overflow: hidden;
+  background: var(--popover); color: var(--popover-foreground);
+  border: 1px solid var(--border); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-float);
+  animation: overlay-in var(--dur-med) var(--ease-out) both;
+}
+.dialog__head { display: flex; align-items: flex-start; gap: 12px; padding: 20px 20px 0; }
+.dialog__titles { display: grid; gap: 4px; flex: 1; min-width: 0; }
+.dialog__title { font-size: var(--text-md); font-weight: 600; line-height: 1.3; }
+.dialog__desc { font-size: var(--text-sm); color: var(--muted-foreground); }
+.dialog__close { margin: -6px -8px 0 0; }
+.dialog__body { display: grid; gap: 14px; padding: 16px 20px 20px; }
+.dialog__foot {
+  display: flex; align-items: center; justify-content: flex-end; gap: 8px; padding: 12px 20px;
+  border-top: 1px solid var(--border); background: var(--card);
+}
+.dialog__foot .hint { margin-right: auto; }
+.dialog--danger .dialog__icon {
+  display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; flex: none;
+  background: color-mix(in oklab, var(--destructive) 12%, var(--popover)); color: var(--destructive);
+}
+.dialog--danger .dialog__icon .i { width: 18px; height: 18px; }
+
+/* ---------- Side sheet ---------- */
+.sheet {
+  display: flex; flex-direction: column; width: 100%; max-width: 400px; height: 100%; min-height: 0;
+  background: var(--popover); color: var(--popover-foreground);
+  border-left: 1px solid var(--border);
+  box-shadow: var(--shadow-float);
+  animation: sheet-in var(--dur-slow) var(--ease-out) both;
+}
+.sheet__head { display: flex; align-items: flex-start; gap: 12px; padding: 16px 16px 14px 20px; border-bottom: 1px solid var(--border); }
+.sheet__titles { display: grid; gap: 6px; flex: 1; min-width: 0; }
+.sheet__title { font-size: var(--text-md); font-weight: 600; line-height: 1.3; }
+.sheet__body { flex: 1; min-height: 0; overflow: auto; display: grid; align-content: start; gap: 16px; padding: 16px 20px; }
+.sheet__foot { display: flex; align-items: center; gap: 8px; padding: 12px 16px 12px 20px; border-top: 1px solid var(--border); }
+.sheet__foot .btn:first-child { margin-right: auto; }
+
+/* Key/value data list (used in sheet and dialogs) */
+.kv { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 0; font-size: var(--text-sm); }
+.kv dt, .kv dd { margin: 0; display: flex; align-items: center; min-height: 32px; border-bottom: 1px solid var(--border); }
+.kv dt { color: var(--muted-foreground); }
+.kv dd { gap: 8px; min-width: 0; }
+.kv dt:last-of-type, .kv dd:last-of-type { border-bottom: 0; }
+
+/* ---------- Toasts ---------- */
+.toast-stack { display: flex; flex-direction: column; gap: 8px; width: 100%; max-width: 360px; }
+.toast {
+  display: flex; align-items: flex-start; gap: 10px; padding: 12px 8px 12px 14px;
+  background: var(--popover); color: var(--popover-foreground);
+  border: 1px solid var(--border); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-float);
+  animation: toast-in var(--dur-slow) var(--ease-out) both;
+}
+.toast > .i { width: 18px; height: 18px; margin-top: 1px; }
+.toast--ok > .i { color: var(--success); }
+.toast--err > .i { color: var(--destructive); }
+.toast--info > .i { color: var(--muted-foreground); }
+.toast__text { display: grid; gap: 2px; flex: 1; min-width: 0; line-height: 1.35; }
+.toast__title { font-size: var(--text-sm); font-weight: 600; }
+.toast__desc { font-size: var(--text-sm); color: var(--muted-foreground); }
+.toast__actions { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+.toast > .toast__actions { margin-top: 0; align-self: center; }
+.toast__actions .btn--sm { height: 28px; }
+.toast__close {
+  display: inline-grid; place-items: center; width: 28px; height: 28px; flex: none;
+  border: 0; border-radius: var(--radius-sm); background: transparent; color: var(--muted-foreground);
+}
+.toast__close:hover { background: var(--muted); color: var(--foreground); }
+.toast__close .i { width: 16px; height: 16px; }
+
+@keyframes overlay-in { from { opacity: 0; transform: translateY(6px) scale(0.98); } to { opacity: 1; transform: none; } }
+@keyframes sheet-in   { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: none; } }
+@keyframes toast-in   { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .cmdk, .dialog, .sheet, .toast { animation: none; }
+}

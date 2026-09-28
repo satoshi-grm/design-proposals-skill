@@ -1,0 +1,103 @@
+<!doctype html><html lang="en" {{ATTRS}}><head><meta charset="utf-8">{{HEAD}}<title>Dashboard · {{NAME}}</title></head>
+<body><div class="app">
+  <aside class="side">
+    <div class="brand"><span class="brand-mark">{i:clapperboard}</span><span class="brand-name">Nocturne</span></div>
+    <nav class="nav">
+      <a aria-current="page">{i:calendar} Programming <span class="count">10</span></a>
+      <a>{i:film} Films</a>
+      <a>{i:ticket} Box office</a>
+      <a>{i:armchair} Auditoriums</a>
+      <a>{i:users} Members</a>
+    </nav>
+    <div class="side-foot">
+      <a>{i:settings} Settings</a>
+      <div class="me"><span class="avatar">RL</span><span class="me-text"><span class="me-name">Rosa Lind</span><span class="me-role">Programmer</span></span></div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="top">
+      <nav class="crumbs"><a>Nocturne</a><span class="sep">/</span><a>Programming</a><span class="sep">/</span><span aria-current="page">Today</span></nav>
+      <span class="spacer"></span>
+      <div class="day-switch"><button class="btn btn--ghost btn--icon" aria-label="Previous day">{i:chevron-left}</button><span class="day-label">{i:calendar} Sun 27 Sep</span><button class="btn btn--ghost btn--icon" aria-label="Next day">{i:chevron-right}</button></div>
+      <button class="btn btn--primary">{i:plus} Add showtime</button>
+    </header>
+
+    <section class="board">
+      <div class="board-head">
+        <div class="board-titles">
+          <p class="eyebrow">Sunday 27 September · 17:40</p>
+          <h1 class="page-title">Programming · today</h1>
+        </div>
+        <p class="board-sum">10 showtimes across 3 screens · <span class="mono">766</span> of <span class="mono">1,068</span> seats sold · 1 sold out</p>
+      </div>
+
+      <div class="tl-caption"><h2 class="section-title">Rest of the day</h2><span class="muted small">16:00 to closing · 4 earlier sessions ended</span></div>
+      <div class="tl" style="--span:480">
+        <div class="tl-hours"><span style="--s:0">16:00</span><span style="--s:120">18:00</span><span style="--s:240">20:00</span><span style="--s:360">22:00</span></div>
+        <div class="tl-lane">
+          <div class="tl-screen"><span class="scr-num">1</span><span class="scr-text"><strong>Screen 1</strong><span>180 seats</span></span></div>
+          <div class="tl-track">
+            <div class="slot is-now" style="--s:30;--d:153;--o:78%"><span class="slot-time">16:30</span><span class="slot-title">Metropolis</span><span class="slot-occ">Now · 140/180</span></div>
+            <div class="slot is-sold is-selected" style="--s:240;--d:104;--o:100%"><span class="slot-time">20:00</span><span class="slot-title">Salt Hours</span><span class="slot-occ">Sold out · 180/180</span></div>
+          </div>
+        </div>
+        <div class="tl-lane">
+          <div class="tl-screen"><span class="scr-num">2</span><span class="scr-text"><strong>Screen 2</strong><span>96 seats</span></span></div>
+          <div class="tl-track">
+            <div class="slot is-ended is-cut" style="--s:0;--d:79;--o:89%"><span class="slot-time">15:45</span><span class="slot-title">Nosferatu</span><span class="slot-occ">Ended · 85/96</span></div>
+            <div class="slot" style="--s:195;--d:96;--o:57%"><span class="slot-time">19:15</span><span class="slot-title">Night of the Living Dead</span><span class="slot-occ">55/96</span></div>
+            <div class="slot" style="--s:345;--d:104;--o:73%"><span class="slot-time">21:45</span><span class="slot-title">Salt Hours</span><span class="slot-occ">70/96</span></div>
+          </div>
+        </div>
+        <div class="tl-lane">
+          <div class="tl-screen"><span class="scr-num">3</span><span class="scr-text"><strong>Screen 3</strong><span>48 seats</span></span></div>
+          <div class="tl-track">
+            <div class="slot is-ended is-cut" style="--s:0;--d:44;--o:35%"><span class="slot-time">15:00</span><span class="slot-title">Salt Hours</span><span class="slot-occ">Ended</span></div>
+            <div class="slot" style="--s:120;--d:67;--o:50%"><span class="slot-time">18:00</span><span class="slot-title">The General</span><span class="slot-occ">24/48</span></div>
+            <div class="slot is-few" style="--s:375;--d:96;--o:92%"><span class="slot-time">22:15</span><span class="slot-title">Night of the Living Dead</span><span class="slot-occ">Few seats · 44/48</span></div>
+          </div>
+        </div>
+        <div class="tl-now" style="--s:100"><span class="tl-now-label">17:40</span></div>
+      </div>
+
+      <div class="next">
+        <div class="next-head"><h2 class="section-title">Up next</h2><span class="muted small">Sessions from now</span></div>
+        <table class="sess">
+          <thead><tr><th class="c-time">Time</th><th>Film</th><th class="c-scr">Screen</th><th class="c-run">Runtime</th><th class="c-occ">Occupancy</th><th class="c-st">Status</th></tr></thead>
+          <tbody>
+            <tr><td class="c-time mono">16:30</td><td class="c-film"><span class="truncate">Metropolis</span><span class="yr">1927</span></td><td class="c-scr">Screen 1</td><td class="c-run mono">153 min</td><td class="c-occ"><span class="occ" style="--o:78%"><i></i></span><span class="mono">140/180</span></td><td class="c-st"><span class="badge badge--info">Now showing</span></td></tr>
+            <tr><td class="c-time mono">18:00</td><td class="c-film"><span class="truncate">The General</span><span class="yr">1926</span></td><td class="c-scr">Screen 3</td><td class="c-run mono">67 min</td><td class="c-occ"><span class="occ" style="--o:50%"><i></i></span><span class="mono">24/48</span></td><td class="c-st"><span class="badge badge--ok">On sale</span></td></tr>
+            <tr><td class="c-time mono">19:15</td><td class="c-film"><span class="truncate">Night of the Living Dead</span><span class="yr">1968</span></td><td class="c-scr">Screen 2</td><td class="c-run mono">96 min</td><td class="c-occ"><span class="occ" style="--o:57%"><i></i></span><span class="mono">55/96</span></td><td class="c-st"><span class="badge badge--ok">On sale</span></td></tr>
+            <tr class="is-selected"><td class="c-time mono">20:00</td><td class="c-film"><span class="truncate">Salt Hours · Premiere + Q&amp;A</span><span class="yr">2026</span></td><td class="c-scr">Screen 1</td><td class="c-run mono">104 min</td><td class="c-occ"><span class="occ is-full" style="--o:100%"><i></i></span><span class="mono">180/180</span></td><td class="c-st"><span class="badge badge--err">Sold out</span></td></tr>
+            <tr><td class="c-time mono">21:45</td><td class="c-film"><span class="truncate">Salt Hours</span><span class="yr">2026</span></td><td class="c-scr">Screen 2</td><td class="c-run mono">104 min</td><td class="c-occ"><span class="occ" style="--o:73%"><i></i></span><span class="mono">70/96</span></td><td class="c-st"><span class="badge badge--ok">On sale</span></td></tr>
+            <tr><td class="c-time mono">22:15</td><td class="c-film"><span class="truncate">Night of the Living Dead</span><span class="yr">1968</span></td><td class="c-scr">Screen 3</td><td class="c-run mono">96 min</td><td class="c-occ"><span class="occ" style="--o:92%"><i></i></span><span class="mono">44/48</span></td><td class="c-st"><span class="badge badge--warn">Few seats</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <aside class="detail">
+    <figure class="detail-photo"><img src="{{A}}/photos/auditorium.jpg" alt="Screen 1 auditorium"></figure>
+    <div class="detail-body">
+      <p class="eyebrow detail-kicker">Selected · <span class="mono">20:00</span> · Screen 1</p>
+      <h2 class="film-title">Salt Hours</h2>
+      <p class="film-meta">2026 · 104 min · Drama · Dir. Ines Marlow</p>
+      <p class="film-syn">A salt-pan worker records the last winter before the marsh is flooded. Premiere screening, followed by a conversation with the director.</p>
+      <div class="detail-status"><span class="badge badge--err">Sold out</span><span class="muted small">23 people on the waitlist</span></div>
+      <dl class="facts">
+        <div><dt>Language</dt><dd>Portuguese, English subtitles</dd></div>
+        <div><dt>Rating</dt><dd>12+</dd></div>
+        <div><dt>Format</dt><dd>DCP · 5.1</dd></div>
+      </dl>
+      <h3 class="detail-h">Today</h3>
+      <ul class="today">
+        <li><span class="mono">15:00</span><span>Screen 3</span><span class="today-st muted">Ended · 35%</span></li>
+        <li class="is-selected"><span class="mono">20:00</span><span>Screen 1</span><span class="today-st"><span class="badge badge--err">Sold out</span></span></li>
+        <li><span class="mono">21:45</span><span>Screen 2</span><span class="today-st"><span class="badge badge--ok">26 left</span></span></li>
+      </ul>
+      <div class="detail-actions"><button class="btn btn--primary">{i:users} Open waitlist</button><button class="btn">{i:settings} Edit film</button></div>
+    </div>
+  </aside>
+</div></body></html>

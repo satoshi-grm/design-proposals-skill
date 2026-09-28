@@ -1,7 +1,7 @@
 ---
 name: design-proposals
 description: "Use when the user must pick a visual direction before building or redesigning a product. Builds a decision booklet with 3 to 8 visual directions applied to the product's real screens, captured at real size, with a 16:9 PDF, a filterable gallery, a design.md and a tokens.css (shadcn/ui + Tailwind v4) per direction, measured checks (WCAG AA contrast, text of 12 px or more, no clipping) and one firm recommendation."
-version: 0.3.0
+version: 0.4.0
 author: satoshi-grm
 license: MIT
 platforms: [linux, macos]
@@ -10,64 +10,69 @@ metadata:
     tags: [design, proposals, decision, pdf, ui, saas, tokens]
 ---
 
-# Propuestas visuales: ver, comparar y elegir
+# Design proposals: see, compare and choose
 
-Arma un **cuadernillo de decisión** con 3 a 8 direcciones visuales aplicadas a pantallas reales del producto, capturadas a tamaño real y al doble de resolución. Sale un PDF 16:9 (una pantalla por página), una galería `index.html` con filtro por dirección, y por cada dirección un `design.md` y un `tokens.css` listos para pasar al repo. Cierra con comparación, guía de mezcla y **una recomendación firme**.
+Builds a **decision booklet** with 3 to 8 visual directions applied to the product's real screens, captured at real size and at double resolution. The output is a 16:9 PDF (one screen per page), an `index.html` gallery with a filter per direction, and, for each direction, a `design.md` and a `tokens.css` ready to move into the repo. It closes with a comparison, a mixing guide and **one firm recommendation**.
 
-## When to Use
-User must choose between visual directions before building (new product, redesign, a spec that reaches the visual section without a chosen look).
+## When to use
+- The user must choose between visual directions before building: a new product, a redesign, or a project spec that reaches the visual section with no look chosen.
+- The user asks for "proposals", "options", "visual directions" or "how could this look".
+- Something existing looks "default" (untouched shadcn or Tailwind).
+- Not for a patch, a single component, or when the user has already chosen.
+- Count: 3 to 5 by default; 6 to 8 when the user asks for "more proposals".
 
-## Cuándo se usa
-- «Propuestas», «opciones», «direcciones visuales», «cómo podría verse», o una spec de proyecto llega a la parte visual sin idea elegida.
-- Algo existente se ve «por defecto» (shadcn o Tailwind sin tocar).
-- No se usa para un parche, un componente suelto o cuando el usuario ya eligió.
-- Cantidad: 3 a 5 por defecto; 6 a 8 cuando pide «más propuestas».
-
-## Qué trae la skill
-| Archivo | Para qué |
+## What the skill includes
+| File | Purpose |
 |---|---|
-| `templates/componentes/` | Biblioteca «SaaS pro» en HTML y CSS con tokens de nombres shadcn: app shell, ⌘K, tabla con lote, vacíos, skeletons, toasts, modal y sheet, formularios, tabs, onboarding, ajustes, planes, gráficos SVG, avatares, badges, breadcrumbs, paginación y oscuro. `catalogo.html` los muestra todos por tema. Ver su `README.md`. |
-| `templates/ejemplo/` | Proyecto mínimo (dos direcciones, panel 1440×900 y celular 390×844) para copiar como punto de partida. |
-| `scripts/render.sh <carpeta>` | Un comando: fuentes, pantallas 2x, catálogo por tema, límites medidos, contraste, `design.md`, `tokens.css`, PDF, galería y hojas de revisión. Sale con 1 si algo no cumple. |
-| `scripts/build.py` | Lo que corre `render.sh`; `--solo pantallas --dir x` para iterar una dirección. |
-| `scripts/fuentes.py` | Baja Google Fonts a local (capturas sin depender de la red). |
-| `scripts/contraste.py` | WCAG 2.x de pares sueltos o de un JSON. |
-| `references/revision.md` | Criterios de la revisión con visión, página por página. |
-| `references/handoff.md` | Cómo pasa la dirección elegida al repo del producto. |
+| `templates/components/` | "SaaS pro" library in HTML and CSS with shadcn-named tokens: app shell, ⌘K, table with bulk actions, empty states, skeletons, toasts, modal and sheet, forms, tabs, onboarding, settings, plans, SVG charts, avatars, badges, breadcrumbs, pagination and dark mode. `catalog.html` shows them all per theme. See its `README.md`. |
+| `templates/example/` | Starter project to copy: Nocturne, an independent cinema, with three directions (Marquee, Ticket Stub, Projector) and three screens (programming dashboard 1440×900, mobile ticket + seat picker 390×844, lobby TV 1920×1080). |
+| `scripts/render.sh <folder>` | One command: fonts, 2x screens, catalog per theme, measured limits, contrast, `design.md`, `tokens.css`, PDF, gallery and review sheets. Exits with 1 if something fails. |
+| `scripts/build.py` | What `render.sh` runs; `--only screens --dir x` to iterate on one direction. |
+| `scripts/booklet.py` | Builds the booklet HTML and PDF pages. |
+| `scripts/fonts.py` | Downloads Google Fonts locally (captures do not depend on the network). |
+| `scripts/contrast.py` | WCAG 2.x contrast for loose pairs or for a JSON file. |
+| `references/review.md` | Criteria for the visual review, page by page. |
+| `references/handoff.md` | How the chosen direction moves into the product repo. |
+| `references/legacy.md` | Old Spanish keys and folder names, still accepted. |
 
-## Requisitos
-- Python 3.10 o más, solo biblioteca estándar.
-- Chrome o Chromium del sistema, o `chrome-headless-shell` de Playwright (`python3 -m playwright install chromium-headless-shell`). `CHROME` y `SHOT_CHROME` apuntan a un binario propio.
-- Opcional: Pillow (`pip install pillow` en un venv). Con Pillow el PDF lleva las capturas en JPEG y pesa mucho menos, y se arman las hojas de revisión; sin Pillow usa PNG.
-- Opcional: `poppler-utils` (`pdfinfo`, `pdftoppm`) para contar páginas y armar las hojas de revisión.
-- Opcional: `lucide-static` para los íconos `{i:nombre}`: `npm i lucide-static` en la carpeta del cuadernillo (o en la de arriba), o `LUCIDE_DIR=.../lucide-static/icons`. Sin él, el build avisa y sigue sin íconos.
-- Red solo la primera vez, para bajar las fuentes.
+## Requirements
+- Python 3.10 or later, standard library only.
+- System Chrome or Chromium, or Playwright's `chrome-headless-shell` (`python3 -m playwright install chromium-headless-shell`). `CHROME` and `SHOT_CHROME` point to a binary of your choice.
+- Optional: Pillow (`pip install pillow` in a venv). With Pillow the PDF carries the captures as JPEG and weighs much less, and the review sheets get built; without Pillow it uses PNG.
+- Optional: `poppler-utils` (`pdfinfo`, `pdftoppm`) to count pages and build the review sheets.
+- Optional: `lucide-static` for `{i:name}` icons: `npm i lucide-static` in the booklet folder (or the one above it), or `LUCIDE_DIR=.../lucide-static/icons`. Without it, the build warns and continues without icons.
+- Network only the first time, to download fonts.
 
-## Procedimiento
-1. **Contrato (≤ 5 min).** Qué queda fijo (rutas, datos, límites duros, marca del cliente) y qué varía. Si hay sitio o capturas, analizalos primero: colores, tipografías y componentes reales.
-2. **Pantallas del producto, no plantillas.** Elegí 3 o 4 pantallas clave con datos verosímiles del dominio (las mismas en todas las direcciones). Escribilas como HTML en `fuente/pantallas/` a su tamaño real: 1440×900 panel, 390×844 celular, 1920×1080 TV. Usá las clases de `base.css` y un `pantallas.css` propio. Nada de cifras grandes en fila ni sidebar genérico: la pantalla es la que el producto necesita.
-3. **Direcciones.** En `fuente/propuesta.json`: `proyecto` (nombre del producto), nombre del mundo del cliente, frase, idea en 2 líneas, momento firma, 6 ejes (temperatura, densidad, tipografía, forma, imagen, movimiento; cada dirección difiere de las otras en al menos 3), tokens claro y oscuro, fuentes, a favor y en contra honestos. La composición y la firma van en `fuente/direcciones/<id>.css` (todo bajo `[data-dir="<id>"]`). Nivel de referencia: Linear, Vercel, Stripe, Raycast.
-4. **Nada del diseño promedio de IA.** Prohibido: cifras grandes en fila, tarjeta con franja de color, degradé violeta, vidrio (blur de fondo), texto con degradé, tarjetas dentro de tarjetas, marcos de dispositivo dibujados, emojis como íconos. Un solo acento de color; los estados llevan punto o ícono y texto.
-5. **Imágenes.** Fotos libres (Unsplash por ID en `images.unsplash.com`, licencia Unsplash) bajadas a `fuente/assets/fotos/`, o SVG propio. Sin créditos pagos. Íconos: Lucide inline con `{i:nombre}`; el build los copia a `fuente/assets/iconos/` (ver Requisitos; nunca instalación global).
-6. **Render y chequeos medidos.** `bash scripts/render.sh <carpeta>`. Deja `limites.txt` (texto ≥ 12 px y ≥ 28 px en TV, incluidos `::before/::after`; sin scroll horizontal; sin texto recortado) y `contraste.txt` (AA por dirección y modo). Para iterar: `python3 scripts/build.py <carpeta> --solo pantallas,limites --dir <id>`.
-7. **Revisión con visión** de cada PNG y de las hojas `fuente/.build/revision-*.png` con los criterios de `references/revision.md`. Se corrige y se vuelve a renderizar. Una dirección mediocre se descarta y se hace otra.
-8. **Cierre en `propuesta.json`:** comparación, 4 a 6 mezclas («tomar X de A y Y de B») y recomendación con alternativa y pasos.
-9. **Entrega.** Rutas del PDF y de `index.html`, 3 líneas por dirección y **una sola pregunta**: «¿Cuál elegís, o mezclamos? (recomendada: …)». Al elegir, seguí `references/handoff.md`.
+## Procedure
+1. **Contract (5 min or less).** What stays fixed (routes, data, hard limits, client brand) and what varies. If there is a site or screenshots, analyze them first: real colors, typefaces and components.
+2. **Product screens, not templates.** Pick 3 or 4 key screens with believable domain data (the same in every direction). Write them as HTML in `source/screens/` at their real size: 1440×900 dashboard, 390×844 mobile, 1920×1080 TV. Use the classes from `base.css` and your own `screens.css`. No rows of big numbers and no generic sidebar: the screen is the one the product needs.
+3. **Directions.** In `source/proposal.json`: `project` (product name), a name from the client's world, tagline, idea in 2 lines, signature moment, 6 axes (temperature, density, typography, shape, imagery, motion; each direction differs from the others in at least 3), light and dark tokens, fonts, and honest pros and cons. Composition and signature go in `source/directions/<id>.css` (everything under `[data-dir="<id>"]`). Reference level: Linear, Vercel, Stripe, Raycast.
+4. **Nothing from average AI design.** Banned: rows of big numbers, cards with a colored stripe, purple gradients, glass (background blur), gradient text, cards inside cards, drawn device frames, emojis as icons. One accent color only; states carry a dot or icon plus text.
+5. **Images.** Free photos (Unsplash by ID on `images.unsplash.com`, Unsplash License) downloaded to `source/assets/photos/`, or your own SVG. No paid credits. Icons: inline Lucide with `{i:name}`; the build copies them to `source/assets/icons/` (see Requirements; never a global install).
+6. **Render and measured checks.** `bash scripts/render.sh <folder>`. It leaves `limits.txt` (text 12 px or more, 28 px or more on TV, including `::before/::after`; no horizontal scroll; no clipped text) and `contrast.txt` (AA per direction and mode). To iterate: `python3 scripts/build.py <folder> --only screens,limits --dir <id>`. Steps: `themes,screens,catalog,limits,contrast,docs,pdf,gallery,review`.
+7. **Visual review** of each PNG and of the sheets `source/.build/review-*.png` with the criteria in `references/review.md`. Fix and render again. A mediocre direction gets dropped and replaced.
+8. **Closing in `proposal.json`:** comparison, 4 to 6 mixes ("take X from A and Y from B") and a recommendation with an alternative and steps.
+9. **Delivery.** Paths to the PDF and `index.html`, 3 lines per direction and **one single question**: "Which one do you choose, or do we mix? (recommended: ...)". Once chosen, follow `references/handoff.md`.
 
-## Salida (carpeta del proyecto, `docs/propuestas/<fecha>-<tema>/`)
-`index.html`, `propuestas.pdf`, `pantallas/<dir>-<pantalla>.png`, `<dir>/design.md`, `<dir>/tokens.css`, `contraste.txt`, `limites.txt`, `README.md` y `fuente/` (todo lo necesario para regenerar; `fuente/.build/` y `propuestas.html` son intermedios y van al `.gitignore`).
+## Language
+The `lang` field in `proposal.json` controls all generated text (booklet, gallery, `design.md`, reports). `"en"` is the default; `"es"` is supported.
 
-## Con muchas direcciones
-Con 5 o más direcciones, repartí cada dirección en un subagente que solo toca `fuente/direcciones/<id>.css`: vos armás pantallas, `pantallas.css` y la primera dirección; cada subagente renderiza la suya con `--dir <id>` y la revisa con visión. Mostrá 2 pantallas de la primera dirección apenas estén, antes de terminar el resto.
+## Output (project folder, `docs/proposals/<date>-<topic>/`)
+`index.html`, `proposals.pdf`, `screens/<dir>-<screen>.png`, `<dir>/design.md`, `<dir>/tokens.css`, `contrast.txt`, `limits.txt`, `README.md` and `source/` (everything needed to regenerate; `source/.build/` and `proposals.html` are intermediate and go in `.gitignore`).
+
+Older booklets with Spanish keys and folders (`fuente/`, `propuesta.json`, `pantallas/`...) still render with their original names. See `references/legacy.md`.
+
+## With many directions
+With 5 or more directions, hand each direction to a subagent that only touches `source/directions/<id>.css`: you build the screens, `screens.css` and the first direction; each subagent renders its own with `--dir <id>` and reviews it visually. Show 2 screens of the first direction as soon as they are ready, before finishing the rest.
 
 ## Pitfalls
-- Chrome con `--headless=new` le resta ~87 px de alto al viewport: el build usa `chrome-headless-shell` (Playwright) si está; si no, compensa la ventana.
-- Lucide ya no trae íconos de marcas (Instagram, WhatsApp): usá `at-sign`, `message-circle`.
-- Marcos de dispositivo dibujados: prohibidos. Las pantallas van a sangre o sobre un fondo liso.
-- En las superficies que muestran la marca del cliente (TV, páginas públicas) manda esa marca: la dirección cambia composición, no la marca.
-- El `design.md` y los `tokens.css` se generan desde el JSON: no se editan a mano.
-- En el PDF las capturas van como JPEG 2x (calidad 85) si hay Pillow: los PNG sin pérdida lo llevan de 20 a 60 MB.
-- Un texto escondido con `text-indent` o `overflow` cuenta como recorte: para mostrar parte de un dato, usá un `data-*` y `::after`.
+- Chrome with `--headless=new` takes ~87 px off the viewport height: the build uses `chrome-headless-shell` (Playwright) if present; otherwise it compensates the window size.
+- Lucide no longer ships brand icons (Instagram, WhatsApp): use `at-sign`, `message-circle`.
+- Drawn device frames: banned. Screens go full bleed or on a plain background.
+- On surfaces that show the client's brand (TV, public pages) that brand rules: the direction changes composition, not the brand.
+- `design.md` and `tokens.css` are generated from the JSON: do not edit them by hand.
+- In the PDF the captures go as 2x JPEG (quality 85) if Pillow is present: lossless PNGs push it to 20 to 60 MB.
+- Text hidden with `text-indent` or `overflow` counts as clipping: to show part of a value, use a `data-*` attribute and `::after`.
 
-## Se integra bien con
-Opcional, si las tenés: una skill que analice un sitio existente (para el paso 1) y una de spec de proyecto (para recibir el bloque «Para la SPEC» del `design.md`). La skill funciona sola sin ninguna de las dos.
+## Works well with
+Optional, if you have them: a skill that analyzes an existing site (for step 1) and a project spec skill (to receive the "For the SPEC" block from `design.md`). The skill works on its own without either.

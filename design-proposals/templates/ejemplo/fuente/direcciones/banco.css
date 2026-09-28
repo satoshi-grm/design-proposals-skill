@@ -1,3 +1,0 @@
-/* Firma de «Banco de trabajo»: la hora como etiqueta de herramienta */
-[data-dir="banco"] .fila .mono { background: var(--primary); color: var(--primary-foreground); padding: 2px 8px; border-radius: var(--radius-sm); }
-[data-dir="banco"] .m-hora { background: var(--primary); color: var(--primary-foreground); padding: 4px 10px; border-radius: var(--radius-sm); display: inline-block; }

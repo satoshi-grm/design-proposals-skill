@@ -1,0 +1,108 @@
+/* «Projector» · cold, high contrast, heavy geometric sans, solid color blocks, signage first.
+   Signature: screen numbers as solid squares and Archivo ExtraBold set tight at signage size. */
+
+[data-dir="projector"] .eyebrow { font-family: var(--font-mono); letter-spacing: 0.02em; }
+[data-dir="projector"] .btn { font-weight: 600; transition-duration: 120ms; }
+
+/* Dashboard: black rail, blue blocks */
+[data-dir="projector"] .side { border-right: 0; padding: 0 0 16px; gap: 12px; }
+[data-dir="projector"] .brand { height: 56px; padding: 0 16px; gap: 12px; background: var(--sidebar-accent); color: var(--sidebar-accent-foreground); }
+[data-dir="projector"] .brand-mark { background: transparent; color: inherit; width: auto; }
+[data-dir="projector"] .brand-mark .i { width: 20px; height: 20px; }
+[data-dir="projector"] .brand-name { font-size: 20px; font-weight: 800; letter-spacing: -0.03em; }
+[data-dir="projector"] .nav { padding: 0 8px; }
+[data-dir="projector"] .nav a, [data-dir="projector"] .side-foot > a { height: 38px; font-size: var(--text-md); font-weight: 600; }
+[data-dir="projector"] .side-foot { padding: 0 8px; }
+[data-dir="projector"] .me .avatar { border-radius: 0; }
+[data-dir="projector"] .top { background: var(--card); }
+[data-dir="projector"] .page-title { font-size: 48px; line-height: 1; }
+[data-dir="projector"] .board { gap: 26px; }
+[data-dir="projector"] .board-sum { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--foreground); }
+[data-dir="projector"] .tl { --label: 124px; }
+[data-dir="projector"] .tl-lane { min-height: 68px; }
+[data-dir="projector"] .tl-track { background: var(--card); border-radius: 0; }
+[data-dir="projector"] .scr-num { width: 40px; height: 40px; border: 0; background: var(--foreground); color: var(--background); font-family: var(--font-display); font-size: 22px; font-weight: 800; }
+[data-dir="projector"] .slot { top: 0; bottom: 0; border: 0; border-radius: 0; background: var(--foreground); color: var(--background); }
+[data-dir="projector"] .slot .slot-time, [data-dir="projector"] .slot .slot-occ { color: var(--background); }
+[data-dir="projector"] .slot::after { display: none; }
+[data-dir="projector"] .slot.is-ended { background: var(--muted); color: var(--muted-foreground); }
+[data-dir="projector"] .slot.is-ended .slot-time, [data-dir="projector"] .slot.is-ended .slot-occ { color: var(--muted-foreground); }
+[data-dir="projector"] .slot.is-selected { background: var(--primary); color: var(--primary-foreground); }
+[data-dir="projector"] .slot.is-selected .slot-time, [data-dir="projector"] .slot.is-selected .slot-occ { color: var(--primary-foreground); }
+[data-dir="projector"] .slot-title { font-weight: 700; }
+[data-dir="projector"] .tl-now { background: var(--primary); width: 3px; }
+[data-dir="projector"] .tl-now-label { background: var(--primary); color: var(--primary-foreground); border-radius: 0; }
+[data-dir="projector"] .section-title { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; }
+[data-dir="projector"] .sess th { font-family: var(--font-mono); text-transform: uppercase; border-bottom: 2px solid var(--foreground); }
+[data-dir="projector"] .sess td.c-time { font-weight: 600; font-size: var(--text-md); }
+[data-dir="projector"] .sess td.c-film { font-weight: 700; }
+[data-dir="projector"] .sess tr.is-selected td { background: var(--card); }
+[data-dir="projector"] .sess tr.is-selected td:first-child { box-shadow: inset 6px 0 0 var(--primary); padding-left: 14px; }
+[data-dir="projector"] .occ { border-radius: 0; height: 10px; }
+[data-dir="projector"] .occ i { border-radius: 0; }
+[data-dir="projector"] .badge { border-radius: 0; font-weight: 700; }
+
+[data-dir="projector"] .detail { background: var(--card); border-left: 0; }
+[data-dir="projector"] .detail-photo { height: 190px; background: var(--foreground); }
+[data-dir="projector"] .detail-photo img { filter: grayscale(1) contrast(1.15); }
+[data-dir="projector"] .detail-body { gap: 12px; }
+[data-dir="projector"] .detail-kicker { display: inline-flex; align-self: flex-start; padding: 4px 8px; background: var(--primary); color: var(--primary-foreground); }
+[data-dir="projector"] .film-title { font-size: 44px; line-height: 0.95; }
+[data-dir="projector"] .detail-h { font-family: var(--font-mono); }
+[data-dir="projector"] .today li { border-radius: 0; }
+[data-dir="projector"] .today li.is-selected { background: var(--muted); box-shadow: inset 4px 0 0 var(--primary); }
+
+/* Phone: black header block, square seats, heavy total */
+[data-dir="projector"] .m-top { background: var(--sidebar); color: var(--sidebar-foreground); }
+[data-dir="projector"] .m-top .btn { color: var(--sidebar-foreground); }
+[data-dir="projector"] .m-top .m-step { color: var(--sidebar-muted); }
+[data-dir="projector"] .m-top-title { font-weight: 800; }
+[data-dir="projector"] .m-film { grid-template-columns: 96px 1fr; padding: 0 20px 0 0; gap: 16px; background: var(--card); }
+[data-dir="projector"] .m-photo { width: 96px; height: 112px; border-radius: 0; filter: grayscale(1) contrast(1.15); }
+[data-dir="projector"] .m-title { font-size: 32px; line-height: 0.95; }
+[data-dir="projector"] .m-seats { padding-top: 22px; }
+[data-dir="projector"] .screen-line::before { border-radius: 0; height: 8px; width: 100%; opacity: 1; }
+[data-dir="projector"] .seat { border-radius: 0; border-width: 2px; }
+[data-dir="projector"] .seat.is-taken { background: var(--foreground); border-color: var(--foreground); opacity: 0.18; }
+[data-dir="projector"] .legend .seat { border-radius: 0; }
+[data-dir="projector"] .m-sum { border-top: 2px solid var(--foreground); }
+[data-dir="projector"] .m-total { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; }
+[data-dir="projector"] .m-pay .btn { height: 60px; font-size: 18px; font-weight: 800; }
+
+/* Lobby: black board, screen numbers as blue squares */
+[data-dir="projector"] .tv { background: var(--sidebar); color: var(--sidebar-foreground); }
+[data-dir="projector"] .tv-main { gap: 26px; }
+[data-dir="projector"] .tv-brand { font-weight: 800; font-size: 36px; letter-spacing: -0.02em; }
+[data-dir="projector"] .tv-clock { color: var(--sidebar-muted); }
+[data-dir="projector"] .tv-hour { color: var(--sidebar-foreground); }
+[data-dir="projector"] .tv-title { font-size: 168px; line-height: 0.85; letter-spacing: -0.05em; }
+[data-dir="projector"] .tv-now { color: var(--sidebar-muted); }
+[data-dir="projector"] .tv-now strong { color: var(--sidebar-foreground); }
+[data-dir="projector"] .tv-live { border-radius: 0; background: var(--sidebar-accent); }
+[data-dir="projector"] .tv-list { border-top: 0; gap: 8px; }
+[data-dir="projector"] .tv-row { grid-template-columns: 120px 180px minmax(0, 1fr) 240px; height: 120px; border-bottom: 0; gap: 36px; }
+[data-dir="projector"] .tv-screen { order: -1; display: grid; place-items: center; align-self: stretch; background: var(--sidebar-accent); color: var(--sidebar-accent-foreground); }
+[data-dir="projector"] .tv-screen-l { display: none; }
+[data-dir="projector"] .tv-screen b { font-family: var(--font-display); font-size: 80px; font-weight: 800; color: inherit; line-height: 1; }
+[data-dir="projector"] .tv-time { font-size: 64px; font-weight: 600; }
+[data-dir="projector"] .tv-name { font-size: 56px; font-weight: 800; letter-spacing: -0.03em; }
+[data-dir="projector"] .tv-meta { color: var(--sidebar-muted); font-family: var(--font-mono); }
+[data-dir="projector"] .tv-status { justify-self: stretch; justify-content: center; align-self: stretch; color: var(--background); font-size: 32px; font-weight: 800; }
+[data-dir="projector"] .tv-status::before { background: var(--background); border-radius: 0; }
+[data-dir="projector"] .tv-status.is-ok { background: var(--success); color: var(--background); }
+[data-dir="projector"] .tv-status.is-warn { background: var(--warning); color: var(--background); }
+[data-dir="projector"] .tv-status.is-err { background: var(--destructive); color: var(--background); }
+[data-dir="projector"] .tv-row.is-sold .tv-name, [data-dir="projector"] .tv-row.is-sold .tv-time { color: var(--sidebar-muted); }
+[data-dir="projector"] .tv-foot { color: var(--sidebar-muted); }
+/* Lobby: keep inside the 5 % safe area; only sold out and few seats get a loud block */
+[data-dir="projector"] .tv-main { gap: 20px; }
+[data-dir="projector"] .tv-title { font-size: 148px; }
+[data-dir="projector"] .tv-row { height: 108px; }
+[data-dir="projector"] .tv-status.is-ok { background: transparent; color: var(--sidebar-foreground); box-shadow: inset 0 0 0 2px var(--sidebar-border); }
+[data-dir="projector"] .tv-status.is-ok::before { background: var(--success); }
+/* Phone: bigger seat map */
+[data-dir="projector"] .m-seats { padding: 26px 14px 16px; }
+[data-dir="projector"] .seatmap { gap: 10px; }
+[data-dir="projector"] .seat-row { gap: 3px; }
+[data-dir="projector"] .seatmap .seat { width: 22px; height: 22px; }
+[data-dir="projector"] .aisle { width: 10px; }

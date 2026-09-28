@@ -1,0 +1,72 @@
+/* «Marquee» · warm dark, editorial serif, the photograph leads.
+   Signature: film titles set large in Fraunces over a full-bleed still that fades into the room. */
+
+[data-dir="marquee"] .eyebrow { letter-spacing: 0.12em; }
+[data-dir="marquee"] .brand-name { font-size: 22px; font-weight: 500; }
+[data-dir="marquee"] .brand-mark { background: transparent; color: var(--accent-ink); border: 1px solid var(--border); border-radius: 50%; }
+
+/* Dashboard: the detail panel is wider and opens with the still */
+[data-dir="marquee"] .app { grid-template-columns: 216px minmax(0, 1fr) 400px; }
+[data-dir="marquee"] .page-title { font-size: 40px; }
+[data-dir="marquee"] .board { gap: 28px; padding: 28px 32px; }
+[data-dir="marquee"] .tl-track { background: transparent; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); border-radius: 0; }
+[data-dir="marquee"] .tl-lane + .tl-lane .tl-track { border-top: 0; }
+[data-dir="marquee"] .slot { border-radius: var(--radius); border-color: var(--border); background: var(--muted); }
+[data-dir="marquee"] .slot.is-ended { background: transparent; border-color: var(--border); }
+[data-dir="marquee"] .slot.is-selected { background: var(--primary); border-color: var(--primary); }
+[data-dir="marquee"] .scr-num { border-radius: 50%; border-color: var(--border); font-family: var(--font-display); font-size: var(--text-md); font-weight: 500; }
+[data-dir="marquee"] .section-title { font-family: var(--font-display); font-weight: 500; font-size: 22px; letter-spacing: -0.01em; }
+[data-dir="marquee"] .sess tr.is-selected td { background: transparent; color: var(--accent-ink); }
+[data-dir="marquee"] .sess tr.is-selected td:first-child { box-shadow: inset 2px 0 0 var(--primary); }
+[data-dir="marquee"] .sess tr.is-selected .yr,
+[data-dir="marquee"] .sess tr.is-selected .c-run { color: var(--accent-ink); }
+[data-dir="marquee"] .occ i { background: var(--muted-foreground); }
+
+[data-dir="marquee"] .detail { position: relative; background: var(--card); }
+[data-dir="marquee"] .detail-photo { height: 380px; position: relative; background: var(--card); }
+[data-dir="marquee"] .detail-photo img { -webkit-mask-image: linear-gradient(to bottom, #000 45%, transparent 100%); mask-image: linear-gradient(to bottom, #000 45%, transparent 100%); }
+[data-dir="marquee"] .detail-body { margin-top: -96px; position: relative; padding: 0 28px 24px; gap: 10px; }
+[data-dir="marquee"] .film-title { font-size: 52px; font-weight: 500; letter-spacing: -0.03em; }
+[data-dir="marquee"] .film-syn { color: var(--muted-foreground); }
+[data-dir="marquee"] .facts > div { padding: 6px 0; }
+[data-dir="marquee"] .detail-h { font-family: var(--font-display); text-transform: none; letter-spacing: 0; font-size: var(--text-md); font-weight: 500; color: var(--foreground); }
+[data-dir="marquee"] .today li { height: 30px; }
+[data-dir="marquee"] .today li.is-selected { background: transparent; box-shadow: inset 2px 0 0 var(--primary); border-radius: 0; }
+[data-dir="marquee"] .btn { border-radius: 999px; }
+
+/* Phone: the still sits behind the film title */
+[data-dir="marquee"] .m-top { position: absolute; top: 0; left: 0; right: 0; z-index: 2; }
+[data-dir="marquee"] .m-film { position: relative; grid-template-columns: 1fr; height: 236px; padding: 0 24px 18px; align-items: end; }
+[data-dir="marquee"] .m-photo { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 0; opacity: 0.85;
+  -webkit-mask-image: linear-gradient(to bottom, #000 30%, transparent 100%); mask-image: linear-gradient(to bottom, #000 30%, transparent 100%); }
+[data-dir="marquee"] .m-film-text { position: relative; }
+[data-dir="marquee"] .m-title { font-size: 44px; font-weight: 500; }
+[data-dir="marquee"] .m-seats { padding-top: 12px; }
+[data-dir="marquee"] .screen-line::before { background: var(--accent-ink); height: 3px; opacity: 1; }
+[data-dir="marquee"] .seat { border-radius: 8px 8px 4px 4px; border-color: var(--input); background: transparent; }
+[data-dir="marquee"] .seat.is-taken { background: var(--muted); border-color: var(--muted); }
+[data-dir="marquee"] .seat.is-sel { background: var(--primary); border-color: var(--primary); }
+[data-dir="marquee"] .m-total strong { font-family: var(--font-display); font-weight: 500; font-size: 24px; }
+[data-dir="marquee"] .m-pay .btn { border-radius: 999px; }
+
+/* Lobby: half the board is the room */
+[data-dir="marquee"] .tv { grid-template-columns: 620px minmax(0, 1fr); }
+[data-dir="marquee"] .tv-photo { display: block; height: 100%;
+  -webkit-mask-image: linear-gradient(to right, #000 60%, transparent 100%); mask-image: linear-gradient(to right, #000 60%, transparent 100%); }
+[data-dir="marquee"] .tv-main { padding: 54px 96px 54px 40px; gap: 20px; }
+[data-dir="marquee"] .tv-brand { font-weight: 500; color: var(--accent-ink); }
+[data-dir="marquee"] .tv-title { font-size: 136px; font-weight: 500; letter-spacing: -0.035em; }
+[data-dir="marquee"] .tv-list { border-top-width: 1px; }
+[data-dir="marquee"] .tv-row { grid-template-columns: 150px minmax(0, 1fr) 170px 210px; gap: 28px; height: 124px; border-bottom-width: 1px; }
+[data-dir="marquee"] .tv-time { font-family: var(--font-display); font-size: 56px; font-weight: 500; color: var(--accent-ink); }
+[data-dir="marquee"] .tv-name { font-family: var(--font-display); font-weight: 500; font-size: 52px; }
+[data-dir="marquee"] .tv-screen b { font-family: var(--font-display); font-weight: 500; }
+[data-dir="marquee"] .tv-row.is-sold .tv-name,
+[data-dir="marquee"] .tv-row.is-sold .tv-time { color: var(--muted-foreground); }
+[data-dir="marquee"] .tv-title { margin-bottom: 18px; }
+[data-dir="marquee"] .tv-row { grid-template-columns: 150px minmax(0, 1fr) 150px 200px; }
+[data-dir="marquee"] .tv-name { font-size: 46px; }
+/* Phone: keep text over the still readable */
+[data-dir="marquee"] .m-photo { opacity: 0.55; }
+[data-dir="marquee"] .m-film .m-photo { opacity: 0.5; object-position: 50% 20%;
+  -webkit-mask-image: linear-gradient(to bottom, #000 10%, transparent 88%); mask-image: linear-gradient(to bottom, #000 10%, transparent 88%); }

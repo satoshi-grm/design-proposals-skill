@@ -1,0 +1,711 @@
+<!doctype html>
+<!--
+  Component catalog of the "SaaS pro" library in the design-proposals skill.
+  A single 1440 px page with every component together.
+  The theme comes from <html data-theme data-mode>; components only read variables.
+  Icons are inline Lucide (class .i). Sample data: "Nocturne", a made-up independent cinema.
+-->
+<html lang="en" data-theme="example" data-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1440">
+<title>Component library · catalog</title>
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="shell.css">
+<link rel="stylesheet" href="table.css">
+<link rel="stylesheet" href="overlays.css">
+<link rel="stylesheet" href="forms.css">
+<link rel="stylesheet" href="states.css">
+<link rel="stylesheet" href="pages.css">
+<link rel="stylesheet" href="charts.css">
+<link rel="stylesheet" href="themes-example.css">
+<!-- THEMES -->
+<style>
+  /* Catalog layout only; the components live in their own .css files */
+  body { background: var(--background); }
+  .cat { width: 1440px; padding: 18px 32px 12px; display: grid; gap: 14px; }
+  .cat-head { display: flex; align-items: center; gap: 14px; }
+  .cat-logo { --size: 36px; font-size: 15px; border-radius: var(--radius); }
+  .cat-head__text { flex: 1; min-width: 0; display: grid; gap: 2px; }
+  .cat-title { font-family: var(--font-display); font-weight: var(--display-weight); letter-spacing: var(--display-tracking); font-size: var(--text-lg); line-height: 1.2; }
+  .cat-sub { font-size: var(--text-sm); color: var(--muted-foreground); }
+  .cat-sub code, .region code { font-family: var(--font-mono); font-size: var(--text-xs); }
+  .cat-meta { display: flex; align-items: center; gap: 12px; font-size: var(--text-xs); color: var(--muted-foreground); }
+
+  .band { display: grid; gap: 24px; align-items: start; }
+  .region { display: grid; gap: 6px; min-width: 0; align-content: start; }
+  .region__label { display: flex; align-items: baseline; gap: 8px; height: 18px; font-size: var(--text-sm); white-space: nowrap; min-width: 0; }
+  .region__num { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--muted-foreground); }
+  .region__label b { font-weight: 600; }
+  .region__note { color: var(--muted-foreground); overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+  .region__file { margin-left: auto; padding-left: 12px; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--muted-foreground); }
+  .frame { border: 1px solid var(--border); border-radius: var(--radius-lg); }
+  .panel { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); }
+  .col { display: grid; gap: 16px; align-content: start; min-width: 0; }
+
+  /* Band 1 */
+  .b1 { grid-template-columns: minmax(0, 1fr) 312px; }
+  .b1 .shell-main { height: 564px; }
+  .rail-demo { position: relative; height: 300px; }
+  .rail-demo .popover { position: absolute; left: 56px; top: 8px; width: 244px; z-index: 4; }
+  .rail-demo .tip { left: 56px; top: 190px; }
+  .rail-demo .page { padding: 16px; gap: 12px; }
+
+  /* Band 2 */
+  .stage { position: relative; display: grid; grid-template-columns: 500px 404px minmax(0, 1fr); align-items: start; gap: 28px; height: 446px; padding: 24px 0 0 28px; border-radius: var(--radius-lg); overflow: hidden; }
+  .stage .dialogs { display: grid; gap: 16px; align-content: start; }
+  .stage .sheet { justify-self: end; align-self: stretch; margin-top: -24px; max-width: 372px; }
+
+  /* Band 3 */
+  .b3 { grid-template-columns: 704px minmax(0, 1fr); }
+  .form-demo .textarea { min-height: 56px; height: 56px; }
+  .form-demo .form { gap: 14px; }
+  .form-demo { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 24px; padding: 20px; }
+  .form-demo .form-actions { grid-column: 1 / -1; border-top: 1px solid var(--border); padding-top: 14px; margin-top: 2px; }
+  .states { display: grid; grid-template-columns: minmax(0, 1fr) 272px; gap: 16px; align-items: start; }
+  .states .empty { padding: 18px 20px 20px; }
+  .states .error-state { padding: 16px 20px 18px; }
+  .states .empty__art { width: 140px; margin-bottom: 4px; }
+  .states .panel { min-width: 0; }
+  .loading-box { display: grid; gap: 14px; padding: 16px; justify-items: start; }
+  .loading-box .skel-lines { width: 100%; }
+  .skel-narrow .skel-table__row { grid-template-columns: 16px minmax(0, 1.4fr) minmax(0, 1fr) 32px; gap: 12px; }
+
+  /* Bands 4 and 5: two columns stacking regions */
+  .b45 { grid-template-columns: minmax(0, 1fr) 472px; }
+  .settings-demo { padding: 20px 24px 24px 12px; }
+  .onb-demo { padding: 20px; }
+
+  .billing { display: grid; gap: 16px; }
+  .billing__low { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 16px; align-items: start; }
+  .meters { display: grid; gap: 16px; padding: 14px 16px; }
+  .charts { display: grid; gap: 16px; }
+  .chart-panel { padding: 14px 16px; display: grid; gap: 10px; position: relative; }
+  .chart-panel__head { display: flex; align-items: baseline; gap: 8px; }
+  .chart-panel__title { font-size: var(--text-sm); font-weight: 600; flex: 1; }
+  .chart-panel .chart-tip { position: absolute; left: 158px; top: 40px; }
+  .sparks { display: grid; grid-template-columns: 1fr 1fr; }
+  .sparks .spark { padding: 12px 16px; }
+  .sparks .spark + .spark { border-left: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<main class="cat">
+
+  <!-- ============ Header ============ -->
+  <header class="cat-head">
+    <span class="avatar avatar--sq org-mark cat-logo" aria-hidden="true">N</span>
+    <div class="cat-head__text">
+      <h1 class="cat-title">Component library · catalog</h1>
+      <p class="cat-sub">Every component on one sheet. Each color comes from a variable: change <code>data-theme</code> or <code>data-mode</code> and the whole sheet re-skins.</p>
+    </div>
+    <div class="cat-meta">
+      <span class="mono">theme · example</span>
+      <div class="seg" role="group" aria-label="Color mode" id="modo">
+        <button type="button" data-set="light" aria-pressed="true"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" /></svg> Light</button>
+        <button type="button" data-set="dark" aria-pressed="false"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" /></svg> Dark</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ Band 1 · shell + table | rail + toasts ============ -->
+  <div class="band b1">
+    <section class="region">
+      <div class="region__label"><span class="region__num">01</span><b>Shell and data table</b><span class="region__note">240 px sidebar, topbar with search, filters, sorting, multi-select and pagination</span><span class="region__file">shell.css · table.css</span></div>
+      <div class="shell frame shell-main">
+        <aside class="sidebar">
+          <button class="org-switch" type="button" aria-haspopup="menu" aria-expanded="false">
+            <span class="avatar avatar--sq org-mark">NO</span>
+            <span class="org-switch__text"><span class="org-switch__name">Nocturne</span><span class="org-switch__plan">Main St · Repertory plan</span></span>
+            <svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 15 5 5 5-5" /><path d="m7 9 5-5 5 5" /></svg>
+          </button>
+          <nav class="nav" aria-label="Main" style="margin-top:8px">
+            <a class="nav__item" href="#"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg><span class="nav__label">Home</span></a>
+            <a class="nav__item" href="#" aria-current="page"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4" /><path d="M16 2v4" /><rect width="18" height="18" x="3" y="4" rx="2" /><path d="M3 10h18" /></svg><span class="nav__label">Screenings</span><span class="nav__count nav__count--alert">1 delayed</span></a>
+            <a class="nav__item" href="#"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h20" /><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3" /><path d="m7 21 5-5 5 5" /></svg><span class="nav__label">Screens</span><span class="nav__count">3</span></a>
+            <a class="nav__item" href="#"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" /><path d="M7 3v18" /><path d="M3 7.5h4" /><path d="M3 12h18" /><path d="M3 16.5h4" /><path d="M17 3v18" /><path d="M17 7.5h4" /><path d="M17 16.5h4" /></svg><span class="nav__label">Films</span><span class="nav__count">24</span></a>
+            <a class="nav__item" href="#"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="5" height="5" x="3" y="3" rx="1" /><rect width="5" height="5" x="16" y="3" rx="1" /><rect width="5" height="5" x="3" y="16" rx="1" /><path d="M21 16h-3a2 2 0 0 0-2 2v3" /><path d="M21 21v.01" /><path d="M12 7v3a2 2 0 0 1-2 2H7" /><path d="M3 12h.01" /><path d="M12 3h.01" /><path d="M12 16v.01" /><path d="M16 12h1" /><path d="M21 12v.01" /><path d="M12 21v-1" /></svg><span class="nav__label">Tickets</span></a>
+            <a class="nav__item" href="#"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 11-1.296-1.296a2.4 2.4 0 0 0-3.408 0L11 16" /><path d="M4 8a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2" /><circle cx="13" cy="7" r="1" fill="currentColor" /><rect x="8" y="2" width="14" height="14" rx="2" /></svg><span class="nav__label">Members</span><span class="nav__count">412</span></a>
+          </nav>
+          <nav class="nav" aria-label="Venue">
+            <div class="nav__section">Venue</div>
+            <a class="nav__item" href="#"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg><span class="nav__label">Hours</span></a>
+            <a class="nav__item" href="#"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg><span class="nav__label">Staff</span><span class="nav__count">8</span></a>
+            <a class="nav__item" href="#"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" /><circle cx="12" cy="12" r="3" /></svg><span class="nav__label">Settings</span></a>
+          </nav>
+          <div class="sidebar__foot">
+            <button class="user-row" type="button">
+              <span class="avatar" data-presence="on">MQ</span>
+              <span class="user-row__text"><span class="user-row__name">Mara Quinn</span><span class="user-row__mail">mara@nocturne.film</span></span>
+              <svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1" /><circle cx="19" cy="12" r="1" /><circle cx="5" cy="12" r="1" /></svg>
+            </button>
+          </div>
+        </aside>
+        <div class="main">
+          <header class="topbar">
+            <nav class="crumbs" aria-label="Breadcrumb"><a href="#">Nocturne</a><span class="sep">/</span><span aria-current="page">Screenings</span></nav>
+            <button class="search-trigger" type="button"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></svg><span>Search…</span><kbd class="kbd">⌘K</kbd></button>
+            <div class="topbar__actions">
+              <button class="btn btn--ghost btn--icon icon-dot" type="button" aria-label="What's new"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.268 21a2 2 0 0 0 3.464 0" /><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" /></svg></button>
+              <button class="btn btn--ghost btn--icon" type="button" aria-label="Help"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /><path d="M12 17h.01" /></svg></button>
+            </div>
+          </header>
+          <div class="page">
+            <div class="page-head">
+              <div class="page-head__text">
+                <h2 class="page-head__title">Screenings</h2>
+                <p class="page-head__desc">6 screenings tonight on 3 screens · 5 on sale</p>
+              </div>
+              <button class="btn" type="button"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg> Export</button>
+              <button class="btn btn--primary" type="button"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="M12 5v14" /></svg> New screening</button>
+            </div>
+
+            <div class="dt">
+              <div class="dt-toolbar">
+                <label class="search"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></svg><input class="input" type="search" placeholder="Search screenings" aria-label="Search screenings"></label>
+                <button class="chip" type="button" data-active><span class="chip__key">Screen:</span><span class="chip__val">All</span><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></button>
+                <button class="chip" type="button" data-active><span class="chip__key">Status:</span><span class="chip__val">All</span><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></button>
+                <button class="chip chip--add" type="button"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="M12 5v14" /></svg> Filter</button>
+                <span class="spacer"></span>
+                <button class="btn btn--ghost" type="button"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" /><path d="M9 3v18" /><path d="M15 3v18" /></svg> Columns</button>
+              </div>
+              <div class="dt-bulk" role="toolbar" aria-label="Actions on selection">
+                <span class="dt-bulk__count">2 selected</span>
+                <span class="sep">·</span>
+                <button class="btn btn--ghost" type="button"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" /><path d="M21 3v5h-5" /><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" /><path d="M8 16H3v5" /></svg> Email holders</button>
+                <span class="sep">·</span>
+                <button class="btn btn--ghost" type="button"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4a1 1 0 0 1 1-1" /><path d="M15 10a1 1 0 0 1-1-1" /><path d="M21 4a1 1 0 0 0-1-1" /><path d="M21 9a1 1 0 0 1-1 1" /><path d="m3 7 3 3 3-3" /><path d="M6 10V5a2 2 0 0 1 2-2h2" /><rect x="3" y="14" width="7" height="7" rx="1" /></svg> Move screen</button>
+                <span class="sep">·</span>
+                <button class="btn btn--ghost is-danger" type="button"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18.84 12.25 1.72-1.71h-.02a5.004 5.004 0 0 0-.12-7.07 5.006 5.006 0 0 0-6.95 0l-1.72 1.71" /><path d="m5.17 11.75-1.71 1.71a5.004 5.004 0 0 0 .12 7.07 5.006 5.006 0 0 0 6.95 0l1.71-1.71" /><line x1="8" x2="8" y1="2" y2="5" /><line x1="2" x2="5" y1="8" y2="8" /><line x1="16" x2="16" y1="19" y2="22" /><line x1="19" x2="22" y1="16" y2="16" /></svg> Cancel show</button>
+                <span class="spacer"></span>
+                <button class="btn btn--ghost btn--icon" type="button" aria-label="Clear selection"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button>
+              </div>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th class="col-check"><span class="check" role="checkbox" aria-checked="mixed" aria-label="Select all"></span></th>
+                    <th aria-sort="ascending"><button class="sort" type="button">Film <svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 7-7 7 7" /><path d="M12 19V5" /></svg></button></th>
+                    <th style="width:128px">Status</th>
+                    <th style="width:188px">Screen</th>
+                    <th class="num" style="width:124px"><button class="sort" type="button"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 16-4 4-4-4" /><path d="M17 20V4" /><path d="m3 8 4-4 4 4" /><path d="M7 4v16" /></svg> Box office</button></th>
+                    <th class="col-more"><span class="sr">Actions</span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr aria-selected="true">
+                    <td class="col-check"><span class="check" role="checkbox" aria-checked="true"></span></td>
+                    <td><div class="cell-main"><span class="cell-main__title">Metropolis (1927)</span><span class="cell-main__sub">Restored print · 19:00</span></div></td>
+                    <td><span class="badge badge--ok">On sale</span></td>
+                    <td><span class="cell-ico"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h20" /><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3" /><path d="m7 21 5-5 5 5" /></svg><span class="truncate">Screen 1</span></span></td>
+                    <td class="num">$ 1,840</td>
+                    <td class="col-more"><button class="row-more" type="button" aria-label="More actions"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1" /><circle cx="19" cy="12" r="1" /><circle cx="5" cy="12" r="1" /></svg></button></td>
+                  </tr>
+                  <tr>
+                    <td class="col-check"><span class="check" role="checkbox" aria-checked="false"></span></td>
+                    <td><div class="cell-main"><span class="cell-main__title">Nosferatu (1922)</span><span class="cell-main__sub">Live score · 19:30</span></div></td>
+                    <td><span class="badge badge--ok">On sale</span></td>
+                    <td><span class="cell-ico"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h20" /><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3" /><path d="m7 21 5-5 5 5" /></svg><span class="truncate">Screen 2</span></span></td>
+                    <td class="num">$ 2,310</td>
+                    <td class="col-more"><button class="row-more" type="button" aria-label="More actions"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1" /><circle cx="19" cy="12" r="1" /><circle cx="5" cy="12" r="1" /></svg></button></td>
+                  </tr>
+                  <tr>
+                    <td class="col-check"><span class="check" role="checkbox" aria-checked="false"></span></td>
+                    <td><div class="cell-main"><span class="cell-main__title">The General (1926)</span><span class="cell-main__sub">Awaiting print from archive</span></div></td>
+                    <td><span class="badge badge--info">On hold</span></td>
+                    <td><span class="cell-ico"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" /></svg><span class="truncate">Unassigned</span></span></td>
+                    <td class="num">$ 560</td>
+                    <td class="col-more"><button class="row-more" type="button" aria-label="More actions"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1" /><circle cx="19" cy="12" r="1" /><circle cx="5" cy="12" r="1" /></svg></button></td>
+                  </tr>
+                  <tr class="is-hover">
+                    <td class="col-check"><span class="check" role="checkbox" aria-checked="false"></span></td>
+                    <td><div class="cell-main"><span class="cell-main__title">Sherlock Jr. (1924)</span><span class="cell-main__sub">Double bill · 20:30</span></div></td>
+                    <td><span class="badge badge--ok">On sale</span></td>
+                    <td><span class="cell-ico"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h20" /><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3" /><path d="m7 21 5-5 5 5" /></svg><span class="truncate">Screen 2</span></span></td>
+                    <td class="num">$ 3,120</td>
+                    <td class="col-more"><button class="row-more" type="button" aria-label="More actions"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1" /><circle cx="19" cy="12" r="1" /><circle cx="5" cy="12" r="1" /></svg></button></td>
+                  </tr>
+                  <tr>
+                    <td class="col-check"><span class="check" role="checkbox" aria-checked="false"></span></td>
+                    <td><div class="cell-main"><span class="cell-main__title">Night of the Living Dead</span><span class="cell-main__sub">Paused by Theo Park</span></div></td>
+                    <td><span class="badge badge--warn">Paused</span></td>
+                    <td><span class="cell-ico"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h20" /><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3" /><path d="m7 21 5-5 5 5" /></svg><span class="truncate">Screen 3</span></span></td>
+                    <td class="num">$ 1,275</td>
+                    <td class="col-more"><button class="row-more" type="button" aria-label="More actions"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1" /><circle cx="19" cy="12" r="1" /><circle cx="5" cy="12" r="1" /></svg></button></td>
+                  </tr>
+                  <tr aria-selected="true">
+                    <td class="col-check"><span class="check" role="checkbox" aria-checked="true"></span></td>
+                    <td><div class="cell-main"><span class="cell-main__title">Caligari (1920) · DCP</span><span class="cell-main__sub">Delayed since 21:14</span></div></td>
+                    <td><span class="badge badge--err">Delayed</span></td>
+                    <td><span class="cell-ico"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h20" /><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3" /><path d="m7 21 5-5 5 5" /></svg><span class="truncate">Screen 1</span></span></td>
+                    <td class="num">$ 980</td>
+                    <td class="col-more"><button class="row-more" type="button" aria-label="More actions"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1" /><circle cx="19" cy="12" r="1" /><circle cx="5" cy="12" r="1" /></svg></button></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="dt-foot">
+                <span class="dt-foot__range">1–6 of 6</span>
+                <div class="pager" aria-label="Pagination">
+                  <span style="margin-right:8px">Rows per page</span>
+                  <button class="chip" type="button" style="height:28px"><span class="chip__val mono">25</span><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></button>
+                  <span style="width:12px"></span>
+                  <button class="pager__btn" type="button" disabled aria-label="Previous"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg></button>
+                  <button class="pager__btn" type="button" aria-current="page">1</button>
+                  <button class="pager__btn" type="button" disabled aria-label="Next"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="col">
+      <section class="region">
+        <div class="region__label"><span class="region__num">02</span><b>60 px rail</b><span class="region__note">organizations</span><span class="region__file">shell.css</span></div>
+        <div class="shell frame rail-demo" data-collapsed>
+          <aside class="sidebar">
+            <button class="org-switch" type="button" aria-haspopup="menu" aria-expanded="true" aria-label="Switch organization"><span class="avatar avatar--sq org-mark">NO</span><span class="org-switch__text"><span class="org-switch__name">Nocturne</span></span><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 15 5 5 5-5" /><path d="m7 9 5-5 5 5" /></svg></button>
+            <nav class="nav" aria-label="Main" style="margin-top:8px">
+              <a class="nav__item" href="#" aria-label="Home"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg><span class="nav__label">Home</span></a>
+              <a class="nav__item" href="#" aria-current="page" data-badge aria-label="Screenings, 1 delayed"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4" /><path d="M16 2v4" /><rect width="18" height="18" x="3" y="4" rx="2" /><path d="M3 10h18" /></svg><span class="nav__label">Screenings</span></a>
+              <a class="nav__item" href="#" aria-label="Screens"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h20" /><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3" /><path d="m7 21 5-5 5 5" /></svg><span class="nav__label">Screens</span></a>
+              <a class="nav__item is-hover" href="#" aria-label="Tickets"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="5" height="5" x="3" y="3" rx="1" /><rect width="5" height="5" x="16" y="3" rx="1" /><rect width="5" height="5" x="3" y="16" rx="1" /><path d="M21 16h-3a2 2 0 0 0-2 2v3" /><path d="M21 21v.01" /><path d="M12 7v3a2 2 0 0 1-2 2H7" /><path d="M3 12h.01" /><path d="M12 3h.01" /><path d="M12 16v.01" /><path d="M16 12h1" /><path d="M21 12v.01" /><path d="M12 21v-1" /></svg><span class="nav__label">Tickets</span></a>
+            </nav>
+            <div class="sidebar__foot">
+              <button class="user-row" type="button" aria-label="Theo Park"><span class="avatar" data-presence="on">TP</span><span class="user-row__text"><span class="user-row__name">Theo Park</span></span></button>
+            </div>
+          </aside>
+          <div class="main">
+            <header class="topbar"><nav class="crumbs"><span aria-current="page">Home</span></nav></header>
+            <div class="page" aria-busy="true">
+              <span class="skel skel--title" style="--w:52%"></span>
+              <div class="skel-card"><span class="skel skel--block" style="--h:64px"></span><span class="skel skel--line" style="--w:70%"></span></div>
+              <div class="skel-card"><span class="skel skel--line" style="--w:80%"></span><span class="skel skel--line" style="--w:45%"></span></div>
+            </div>
+          </div>
+          <div class="popover" role="menu" aria-label="Organizations">
+            <div class="popover__label">Organizations</div>
+            <button class="menu-item" role="menuitemradio" aria-checked="true" data-highlighted type="button">
+              <span class="avatar avatar--sq org-mark">NO</span>
+              <span class="menu-item__text"><span>Nocturne</span><span class="menu-item__sub">Main Street · 3 screens</span></span>
+              <svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>
+            </button>
+            <button class="menu-item" role="menuitemradio" aria-checked="false" type="button">
+              <span class="avatar avatar--sq">LC</span>
+              <span class="menu-item__text"><span>Lumen Cinema</span><span class="menu-item__sub">Harbor Side · 2 screens</span></span>
+            </button>
+            <div class="menu-sep"></div>
+            <button class="menu-item" role="menuitem" type="button"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="M12 5v14" /></svg><span class="menu-item__text">Create organization</span></button>
+          </div>
+          <span class="tip" role="tooltip">Tickets <kbd class="kbd">G</kbd><kbd class="kbd">T</kbd></span>
+        </div>
+      </section>
+
+      <section class="region">
+        <div class="region__label"><span class="region__num">03</span><b>Stacked toasts</b><span class="region__file">overlays.css</span></div>
+        <div class="toast-stack">
+          <div class="toast toast--ok" role="status"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="m16 9-5.5 5.5L8 12" /></svg><div class="toast__text"><p class="toast__title">Member reminders sent</p><p class="toast__desc">Delivered to 312 members.</p></div><button class="toast__close" type="button" aria-label="Close"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button></div>
+          <div class="toast toast--err" role="alert"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="m15 9-6 6" /><path d="m9 9 6 6" /></svg><div class="toast__text"><p class="toast__title">Caligari is running late</p><p class="toast__desc">Due on Screen 1 at 21:14. The DCP key has not arrived.</p></div><button class="toast__close" type="button" aria-label="Close"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button></div>
+          <div class="toast toast--info" role="status"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18.84 12.25 1.72-1.71h-.02a5.004 5.004 0 0 0-.12-7.07 5.006 5.006 0 0 0-6.95 0l-1.72 1.71" /><path d="m5.17 11.75-1.71 1.71a5.004 5.004 0 0 0 .12 7.07 5.006 5.006 0 0 0 6.95 0l1.71-1.71" /><line x1="8" x2="8" y1="2" y2="5" /><line x1="2" x2="5" y1="8" y2="8" /><line x1="16" x2="16" y1="19" y2="22" /><line x1="19" x2="22" y1="16" y2="16" /></svg><div class="toast__text"><p class="toast__title">You cancelled Metropolis at 19:00</p><div class="toast__actions"><button class="btn btn--sm" type="button"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" /><path d="M21 3v5h-5" /></svg> Undo</button></div></div><button class="toast__close" type="button" aria-label="Close"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button></div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ============ Band 2 · overlays on the scrim ============ -->
+  <section class="region">
+    <div class="region__label"><span class="region__num">04</span><b>Overlays</b><span class="region__note">⌘K command bar, modal, destructive confirmation and side sheet over a flat scrim</span><span class="region__file">overlays.css</span></div>
+    <div class="stage scrim">
+      <div class="cmdk" role="dialog" aria-label="Command bar">
+        <div class="cmdk__input"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></svg><input type="text" value="re" aria-label="Search"><kbd class="kbd">esc</kbd></div>
+        <div class="cmdk__list" role="listbox">
+          <div class="cmdk__group">
+            <div class="cmdk__label">Screenings</div>
+            <div class="cmdk__item" role="option" aria-selected="true"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4" /><path d="M16 2v4" /><rect width="18" height="18" x="3" y="4" rx="2" /><path d="M3 10h18" /></svg><span>Caligari · Sc<mark>re</mark>en 1 · 21:14</span><span class="cmdk__meta"><span class="badge badge--err">Delayed</span></span></div>
+          </div>
+          <div class="cmdk__group">
+            <div class="cmdk__label">Tickets</div>
+            <div class="cmdk__item" role="option"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z" /><path d="M13 5v2" /><path d="M13 17v2" /><path d="M13 11v2" /></svg><span><mark>Re</mark>fund ticket #4471</span><span class="cmdk__meta">Member · 2 seats</span></div>
+          </div>
+          <div class="cmdk__group">
+            <div class="cmdk__label">Actions</div>
+            <div class="cmdk__item" role="option"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="M12 5v14" /></svg><span><mark>Re</mark>schedule screening</span><span class="cmdk__meta"><kbd class="kbd">R</kbd></span></div>
+            <div class="cmdk__item" role="option"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg><span>Invite c<mark>re</mark>w member</span><span class="cmdk__meta"><kbd class="kbd">G</kbd><kbd class="kbd">C</kbd></span></div>
+            <div class="cmdk__item" role="option"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6" /><path d="M10 14 21 3" /><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /></svg><span><mark>Re</mark>port for Sherlock Jr.</span><span class="cmdk__meta"><kbd class="kbd">⌘</kbd><kbd class="kbd">↵</kbd></span></div>
+          </div>
+        </div>
+        <div class="cmdk__foot">
+          <span><kbd class="kbd">↑</kbd><kbd class="kbd">↓</kbd> Navigate</span>
+          <span><kbd class="kbd">↵</kbd> Open</span>
+          <span class="spacer"></span>
+          <span>5 results</span>
+        </div>
+      </div>
+
+      <div class="dialogs">
+        <div class="dialog" role="dialog" aria-labelledby="dlg1">
+          <div class="dialog__head">
+            <div class="dialog__titles"><h3 class="dialog__title" id="dlg1">Move screen</h3><p class="dialog__desc">Applies to Metropolis and Caligari.</p></div>
+            <button class="btn btn--ghost btn--icon btn--sm dialog__close" type="button" aria-label="Close"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button>
+          </div>
+          <div class="dialog__body">
+            <div class="field"><span class="label">Screen</span><button class="select" type="button"><span class="select__val"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h20" /><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3" /><path d="m7 21 5-5 5 5" /></svg> Screen 2</span><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 15 5 5 5-5" /><path d="m7 9 5-5 5 5" /></svg></button><span class="hint">The projection booth sees it instantly.</span></div>
+          </div>
+          <div class="dialog__foot"><button class="btn" type="button">Cancel</button><button class="btn btn--primary" type="button">Move 2 screenings</button></div>
+        </div>
+
+        <div class="dialog dialog--danger" role="alertdialog" aria-labelledby="dlg2">
+          <div class="dialog__head">
+            <span class="dialog__icon"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" /><path d="M12 9v4" /><path d="M12 17h.01" /></svg></span>
+            <div class="dialog__titles"><h3 class="dialog__title" id="dlg2">Cancel the Caligari screening?</h3><p class="dialog__desc">The screen is freed and ticket holders are refunded. They will need to book another showtime.</p></div>
+          </div>
+          <div class="dialog__foot" style="margin-top:16px"><button class="btn" type="button">Keep it</button><button class="btn btn--danger" type="button"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18.84 12.25 1.72-1.71h-.02a5.004 5.004 0 0 0-.12-7.07 5.006 5.006 0 0 0-6.95 0l-1.72 1.71" /><path d="m5.17 11.75-1.71 1.71a5.004 5.004 0 0 0 .12 7.07 5.006 5.006 0 0 0 6.95 0l1.71-1.71" /><line x1="8" x2="8" y1="2" y2="5" /><line x1="2" x2="5" y1="8" y2="8" /><line x1="16" x2="16" y1="19" y2="22" /><line x1="19" x2="22" y1="16" y2="16" /></svg> Cancel show</button></div>
+        </div>
+      </div>
+
+      <aside class="sheet" role="dialog" aria-labelledby="sh1">
+        <div class="sheet__head">
+          <div class="sheet__titles">
+            <h3 class="sheet__title" id="sh1">Sherlock Jr. (1924)</h3>
+            <div class="row"><span class="badge badge--ok">On sale</span><span class="xs muted mono">print checked 3 min ago</span></div>
+          </div>
+          <button class="btn btn--ghost btn--icon btn--sm" type="button" aria-label="Close"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button>
+        </div>
+        <div class="sheet__body">
+          <dl class="kv">
+            <dt>Screen</dt><dd><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h20" /><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3" /><path d="m7 21 5-5 5 5" /></svg> Screen 2</dd>
+            <dt>Print</dt><dd>Kino Archive <span class="mono xs muted">35mm</span></dd>
+            <dt>Showtime</dt><dd class="mono">20:30 – 22:05</dd>
+            <dt>Screening</dt><dd><span class="mono">S-2048</span><button class="row-more" type="button" aria-label="Copy code"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg></button></dd>
+          </dl>
+          <div class="uptime">
+            <div class="row"><span class="small" style="font-weight:600">Occupancy · 24 h</span><span class="spacer"></span><span class="mono xs">82 %</span></div>
+            <div class="uptime__strip" aria-label="Occupancy by hour">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i data-s="warn"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+            <div class="row mono xs muted"><span>22:00</span><span class="spacer"></span><span>now</span></div>
+          </div>
+        </div>
+        <div class="sheet__foot">
+          <button class="btn btn--ghost is-danger" type="button"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18.84 12.25 1.72-1.71h-.02a5.004 5.004 0 0 0-.12-7.07 5.006 5.006 0 0 0-6.95 0l-1.72 1.71" /><path d="m5.17 11.75-1.71 1.71a5.004 5.004 0 0 0 .12 7.07 5.006 5.006 0 0 0 6.95 0l1.71-1.71" /><line x1="8" x2="8" y1="2" y2="5" /><line x1="2" x2="5" y1="8" y2="8" /><line x1="16" x2="16" y1="19" y2="22" /><line x1="19" x2="22" y1="16" y2="16" /></svg> Cancel show</button>
+          <button class="btn" type="button">Close</button>
+          <button class="btn btn--primary" type="button">Save</button>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============ Band 3 · forms | states ============ -->
+  <div class="band b3">
+    <section class="region">
+      <div class="region__label"><span class="region__num">05</span><b>Forms</b><span class="region__note">prefix, counter, inline validation, option cards and file upload</span><span class="region__file">forms.css</span></div>
+      <form class="panel form-demo" onsubmit="return false">
+        <div class="form">
+          <div class="form-row">
+            <div class="field"><label class="label" for="f-nombre">Cinema name<span class="req" aria-hidden="true">*</span></label><input class="input" id="f-nombre" value="Nocturne" required></div>
+            <div class="field"><span class="label">Programming</span><button class="select" type="button"><span class="select__val">Repertory</span><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></button></div>
+          </div>
+          <div class="field" data-valid>
+            <label class="label" for="f-url">Your page address<span class="req" aria-hidden="true">*</span></label>
+            <div class="input-group"><span class="addon">nocturne.film/</span><input id="f-url" value="mainstreet"><span class="addon addon--ghost"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="m16 9-5.5 5.5L8 12" /></svg></span></div>
+            <p class="field__msg"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg> Available. Members book their own seats there.</p>
+          </div>
+          <div class="field">
+            <div class="field__top"><label class="label" for="f-desc">Description</label><span class="counter" data-near>48/60</span></div>
+            <textarea class="input textarea" id="f-desc" rows="2">Silent classics, live scores and midnight horror</textarea>
+          </div>
+          <div class="field" data-invalid>
+            <label class="label" for="f-wa">Phone<span class="opt">optional</span></label>
+            <div class="input-group is-focus"><span class="addon">+1</span><input id="f-wa" value="212 555 014" aria-invalid="true" aria-describedby="f-wa-e"></div>
+            <p class="field__msg" id="f-wa-e"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><line x1="12" x2="12" y1="8" y2="12" /><line x1="12" x2="12.01" y1="16" y2="16" /></svg> Missing digits. Include the area code: 212 555 0147.</p>
+          </div>
+        </div>
+        <div class="form">
+          <div class="field">
+            <span class="label">Seating</span>
+            <div class="radio-cards" role="radiogroup" style="grid-template-columns:1fr 1fr">
+              <button class="radio-card" type="button" role="radio" aria-checked="true"><span class="radio-card__shape" style="width:32px;height:18px"></span><span class="radio-card__title">Reserved</span><span class="radio-card__desc">Assigned seats</span><span class="radio-card__mark"></span></button>
+              <button class="radio-card" type="button" role="radio" aria-checked="false"><span class="radio-card__shape" style="width:12px;height:18px"></span><span class="radio-card__title">Open</span><span class="radio-card__desc">First come</span><span class="radio-card__mark"></span></button>
+            </div>
+          </div>
+          <div class="field">
+            <span class="label">Posters and trailers</span>
+            <div class="dropzone">
+              <svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12" /><path d="m17 8-5-5-5 5" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /></svg>
+              <p class="dropzone__title">Drag files here or <a href="#">browse</a></p>
+              <p class="hint">PNG, JPG or MP4 · up to 50 MB</p>
+            </div>
+            <div class="file-row"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /><path d="M14 2v5a1 1 0 0 0 1 1h5" /></svg><span class="file-row__name">nosferatu-trailer-4k.mp4</span><span class="file-row__meta">18.4 MB</span><button class="toast__close" type="button" aria-label="Cancel upload"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button><span></span><span class="bar"><span style="--p:.64"></span></span></div>
+          </div>
+        </div>
+        <div class="form-actions">
+          <span class="hint">Changes show up in your program instantly.</span>
+          <button class="btn" type="button">Discard</button>
+          <button class="btn btn--primary" type="submit">Save changes</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="region">
+      <div class="region__label"><span class="region__num">06</span><b>States</b><span class="region__note">empty, error, loading</span><span class="region__file">states.css</span></div>
+      <div class="states">
+        <div class="col" style="gap:16px">
+          <div class="panel empty">
+            <svg class="empty__art" viewBox="0 0 200 120" role="img" aria-label="A program waiting for its first screening">
+              <ellipse class="ill-soft" cx="100" cy="110" rx="86" ry="6"/>
+              <rect class="ill-card" x="22" y="12" width="124" height="76" rx="6"/>
+              <rect class="ill-soft" x="34" y="24" width="100" height="52" rx="3"/>
+              <text class="ill-text" x="84" y="55" text-anchor="middle">19:00</text>
+              <path class="ill-line" d="M70 88l-6 16M98 88l6 16M56 104h56"/>
+              <path class="ill-dash" d="M156 40c0-14-6-22-16-24"/>
+              <rect class="ill-card" x="146" y="44" width="34" height="60" rx="6"/>
+              <path class="ill-line" d="M158 50h10"/>
+              <rect class="ill-fill" x="151" y="68" width="7" height="9" rx="1.5"/>
+              <rect class="ill-fill" x="160" y="68" width="7" height="9" rx="1.5"/>
+              <rect class="ill-faint" x="169" y="68" width="6" height="9" rx="1.5"/>
+              <path class="ill-accent" d="M151 88h24"/>
+            </svg>
+            <h3 class="empty__title">Add your first screening</h3>
+            <p class="empty__desc">Pick the day, the screen and the film. Members get a notice by email.</p>
+            <div class="empty__actions"><button class="btn btn--primary" type="button"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="M12 5v14" /></svg> New screening</button><button class="btn btn--ghost" type="button">See how it works</button></div>
+          </div>
+          <div class="panel error-state" role="alert">
+            <span class="error-state__icon"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h.01" /><path d="M8.5 16.429a5 5 0 0 1 7 0" /><path d="M5 12.859a10 10 0 0 1 5.17-2.69" /><path d="M19 12.859a10 10 0 0 0-2.007-1.523" /><path d="M2 8.82a15 15 0 0 1 4.177-2.643" /><path d="M22 8.82a15 15 0 0 0-11.288-3.764" /><path d="m2 2 20 20" /></svg></span>
+            <h3 class="error-state__title">We couldn't load the program</h3>
+            <p class="error-state__desc">Screenings on sale are unaffected. Try again in a moment.</p>
+            <div class="error-state__actions"><button class="btn" type="button"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" /><path d="M21 3v5h-5" /></svg> Retry</button><span class="error-state__code">Error 504 · 21:16</span></div>
+          </div>
+        </div>
+
+        <div class="col" style="gap:16px">
+          <div class="panel loading-box">
+            <span class="loading-inline"><svg class="spinner" viewBox="0 0 16 16" aria-hidden="true"><circle class="track" cx="8" cy="8" r="6"/><circle class="head" cx="8" cy="8" r="6"/></svg>Syncing 6 screenings…</span>
+            <div class="skel-lines"><span class="skel skel--line" style="--w:92%"></span><span class="skel skel--line" style="--w:74%"></span><span class="skel skel--line" style="--w:48%"></span></div>
+            <button class="btn btn--primary" type="button" data-loading aria-busy="true"><svg class="spinner" viewBox="0 0 16 16" aria-hidden="true"><circle class="track" cx="8" cy="8" r="6"/><circle class="head" cx="8" cy="8" r="6"/></svg>Sending…</button>
+          </div>
+          <div class="panel skel-table skel-narrow" aria-busy="true" aria-label="Loading table">
+            <div class="skel-table__row"><span class="skel"></span><span class="skel skel--line" style="--w:80%"></span><span class="skel skel--pill"></span><span class="skel skel--line" style="--w:28px"></span></div>
+            <div class="skel-table__row"><span class="skel"></span><span class="skel skel--line" style="--w:62%"></span><span class="skel skel--pill" style="--w:60px"></span><span class="skel skel--line" style="--w:24px"></span></div>
+            <div class="skel-table__row"><span class="skel"></span><span class="skel skel--line" style="--w:72%"></span><span class="skel skel--pill" style="--w:52px"></span><span class="skel skel--line" style="--w:28px"></span></div>
+          </div>
+          <div class="skel-card" aria-busy="true" aria-label="Loading screening">
+            <div class="row" style="gap:10px"><span class="skel skel--avatar"></span><div class="skel-lines" style="flex:1;gap:8px"><span class="skel skel--line" style="--w:70%"></span><span class="skel skel--line" style="--w:40%"></span></div></div>
+            <span class="skel skel--block" style="--h:52px"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ Bands 4 and 5 · settings and billing | onboarding and charts ============ -->
+  <div class="band b45">
+    <div class="col">
+    <section class="region">
+      <div class="region__label"><span class="region__num">07</span><b>Settings</b><span class="region__note">sub-navigation, described sections and danger zone</span><span class="region__file">pages.css</span></div>
+      <div class="panel settings settings-demo">
+        <nav class="subnav" aria-label="Settings">
+          <a class="subnav__item" href="#" aria-current="page"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5" /><path d="M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244" /><path d="M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05" /></svg> General</a>
+          <a class="subnav__item" href="#"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg> Staff</a>
+          <a class="subnav__item" href="#"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2" /><line x1="8" x2="16" y1="21" y2="21" /><line x1="12" x2="12" y1="17" y2="21" /></svg> Screens</a>
+          <a class="subnav__item" href="#"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="5" rx="2" /><line x1="2" x2="22" y1="10" y2="10" /><path d="M6 14h2" /></svg> Plan &amp; billing</a>
+          <a class="subnav__item" href="#"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="5" height="5" x="3" y="3" rx="1" /><rect width="5" height="5" x="16" y="3" rx="1" /><rect width="5" height="5" x="3" y="16" rx="1" /><path d="M21 16h-3a2 2 0 0 0-2 2v3" /><path d="M21 21v.01" /><path d="M12 7v3a2 2 0 0 1-2 2H7" /><path d="M3 12h.01" /><path d="M12 3h.01" /><path d="M12 16v.01" /><path d="M16 12h1" /><path d="M21 12v.01" /><path d="M12 21v-1" /></svg> Tickets</a>
+          <div class="subnav__sep"></div>
+          <a class="subnav__item is-danger" href="#"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" /><path d="M12 9v4" /><path d="M12 17h.01" /></svg> Danger zone</a>
+        </nav>
+        <div class="settings__body">
+          <h2 class="settings__title">General</h2>
+          <div class="set-section">
+            <div class="set-section__label"><h3 class="set-section__title">Cinema details</h3><p class="set-section__desc">Shown on your program page and in notices.</p></div>
+            <div class="set-section__controls form-row">
+              <div class="field"><label class="label" for="s-n">Name</label><input class="input" id="s-n" value="Nocturne"></div>
+              <div class="field"><label class="label" for="s-b">Venue</label><input class="input" id="s-b" value="Main Street"></div>
+            </div>
+          </div>
+          <div class="set-section">
+            <div class="set-section__label"><h3 class="set-section__title">Box office hours</h3><p class="set-section__desc">No tickets are sold outside these hours.</p></div>
+            <div class="set-section__controls">
+              <div class="set-line"><span class="switch" role="switch" aria-checked="true" aria-label="Sell tickets automatically"></span><span class="small" style="margin-right:4px">Automatic</span><input class="input mono" value="12:00" aria-label="From" style="width:84px"><span class="muted small">to</span><input class="input mono" value="23:30" aria-label="To" style="width:84px"></div>
+            </div>
+          </div>
+          <div class="set-section set-section--full" style="padding-bottom:0">
+            <div class="set-section__label"><h3 class="set-section__title">Danger zone</h3></div>
+            <div class="danger-zone">
+              <div class="danger-zone__row"><div class="danger-zone__text"><span class="danger-zone__title">Cancel all of tonight's screenings</span><span class="danger-zone__desc">All 6 screenings are cancelled and every ticket holder is emailed.</span></div><button class="btn btn--danger-outline" type="button">Cancel all</button></div>
+              <div class="danger-zone__row"><div class="danger-zone__text"><span class="danger-zone__title">Delete Nocturne</span><span class="danger-zone__desc">Erases screenings, films and members. This cannot be undone.</span></div><button class="btn btn--danger" type="button">Delete</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="region">
+      <div class="region__label"><span class="region__num">09</span><b>Plans and billing</b><span class="region__note">current plan, usage meters and invoices</span><span class="region__file">pages.css · table.css</span></div>
+      <div class="billing">
+        <div class="plans">
+          <div class="plan">
+            <div class="plan__head"><span class="plan__name">Single screen</span></div>
+            <div class="plan__price"><span class="plan__amount">$ 0</span><span class="plan__per">/ mo</span></div>
+            <p class="plan__desc">Online program, no notices.</p>
+            <ul class="plan__feats"><li><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg> Program page</li><li><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg> 1 screen</li></ul>
+            <button class="btn plan__cta" type="button">Downgrade</button>
+          </div>
+          <div class="plan" aria-current="true">
+            <div class="plan__head"><span class="plan__name">Repertory</span><span class="badge badge--live">Current plan</span></div>
+            <div class="plan__price"><span class="plan__amount">$ 49</span><span class="plan__per">/ mo</span></div>
+            <p class="plan__desc">Program and notices for your cinema.</p>
+            <ul class="plan__feats"><li><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg> 3 screens</li><li><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg> 2,000 emails a month</li></ul>
+            <button class="btn plan__cta" type="button" aria-disabled="true">Your plan</button>
+          </div>
+          <div class="plan">
+            <div class="plan__head"><span class="plan__name">Multi-venue</span></div>
+            <div class="plan__price"><span class="plan__amount">$ 129</span><span class="plan__per">/ mo</span></div>
+            <p class="plan__desc">Several venues and direct support.</p>
+            <ul class="plan__feats"><li><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg> 10 screens</li><li><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg> 20,000 emails a month</li></ul>
+            <button class="btn btn--primary plan__cta" type="button">Upgrade</button>
+          </div>
+        </div>
+        <div class="billing__low">
+          <div class="panel meters">
+            <div class="meter" data-level="full">
+              <div class="meter__top"><span class="meter__label">Screens</span><span class="meter__val">3 <span>of 3</span></span></div>
+              <div class="bar" data-level="warn"><span style="--p:1"></span></div>
+              <p class="meter__note"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><line x1="12" x2="12" y1="8" y2="12" /><line x1="12" x2="12.01" y1="16" y2="16" /></svg> You have reached your plan limit.</p>
+            </div>
+            <div class="meter">
+              <div class="meter__top"><span class="meter__label">Emails this month</span><span class="meter__val">1,240 <span>of 2,000</span></span></div>
+              <div class="bar"><span style="--p:.62"></span></div>
+            </div>
+          </div>
+          <div class="dt">
+            <table class="table invoices">
+              <thead><tr><th>Invoice</th><th style="width:96px">Date</th><th class="num" style="width:104px">Amount</th><th style="width:92px">Status</th><th class="col-more"><span class="sr">Download</span></th></tr></thead>
+              <tbody>
+                <tr><td class="mono small">INV-2026-001842</td><td class="mono small">09/01/26</td><td class="num">$ 49.00</td><td><span class="badge badge--ok">Paid</span></td><td class="col-more"><button class="row-more" type="button" aria-label="Download PDF"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg></button></td></tr>
+                <tr><td class="mono small">INV-2026-001611</td><td class="mono small">08/01/26</td><td class="num">$ 49.00</td><td><span class="badge badge--ok">Paid</span></td><td class="col-more"><button class="row-more" type="button" aria-label="Download PDF"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg></button></td></tr>
+              </tbody>
+            </table>
+            <div class="dt-foot" style="height:40px">
+              <span class="dt-foot__range">1–2 of 9</span>
+              <div class="pager"><button class="pager__btn" type="button" disabled aria-label="Previous"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg></button><button class="pager__btn" type="button" aria-current="page">1</button><button class="pager__btn" type="button">2</button><button class="pager__btn" type="button">3</button><span class="pager__btn" aria-hidden="true" style="pointer-events:none">…</span><button class="pager__btn" type="button">5</button><button class="pager__btn" type="button" aria-label="Next"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg></button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    </div>
+    <div class="col">
+    <section class="region">
+      <div class="region__label"><span class="region__num">08</span><b>Onboarding</b><span class="region__note">done, current and pending</span><span class="region__file">pages.css</span></div>
+      <div class="onboarding">
+        <div class="onboarding__head"><h3 class="onboarding__title">Get Nocturne ready for opening night</h3><span class="onboarding__count">2 of 4</span></div>
+        <div class="bar" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="4" aria-label="Progress"><span style="--p:.5"></span></div>
+        <ol class="steps">
+          <li class="step" data-state="done"><span class="step__mark"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg></span><div class="step__text"><span class="step__title">Create your organization</span><span class="step__desc">Nocturne · Main Street</span></div><button class="btn btn--ghost btn--sm" type="button">Edit</button></li>
+          <li class="step" data-state="done"><span class="step__mark"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg></span><div class="step__text"><span class="step__title">Set up your screens</span><span class="step__desc">3 screens · 8 staff</span></div><button class="btn btn--ghost btn--sm" type="button">View screens</button></li>
+          <li class="step" data-state="current" aria-current="step"><span class="step__mark">3</span><div class="step__text"><span class="step__title">Add your first screening</span><span class="step__desc">Pick the day, the screen and the film to show.</span></div><button class="btn btn--primary btn--sm" type="button">Add</button></li>
+          <li class="step" data-state="pending"><span class="step__mark">4</span><div class="step__text"><span class="step__title">Share your program page</span><span class="step__desc">Print the QR for the box office.</span></div><button class="btn btn--sm" type="button"><svg class="i" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="5" height="5" x="3" y="3" rx="1" /><rect width="5" height="5" x="16" y="3" rx="1" /><rect width="5" height="5" x="3" y="16" rx="1" /><path d="M21 16h-3a2 2 0 0 0-2 2v3" /><path d="M21 21v.01" /><path d="M12 7v3a2 2 0 0 1-2 2H7" /><path d="M3 12h.01" /><path d="M12 3h.01" /><path d="M12 16v.01" /><path d="M16 12h1" /><path d="M21 12v.01" /><path d="M12 21v-1" /></svg> Download QR</button></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="region">
+      <div class="region__label"><span class="region__num">10</span><b>Charts</b><span class="region__note">stacked bars, sparkline and 24 h strip</span><span class="region__file">charts.css</span></div>
+      <div class="charts">
+        <div class="panel chart-panel">
+          <div class="chart-panel__head"><span class="chart-panel__title">Program page visits by hour · today</span><span class="mono xs muted">2,736 total</span></div>
+          <svg class="chart" viewBox="0 0 440 132" role="img" aria-label="Program page visits by hour, stacked by source">
+            <g>
+              <line class="chart__grid" x1="32" x2="440" y1="10.5" y2="10.5"/>
+              <line class="chart__grid" x1="32" x2="440" y1="43.5" y2="43.5"/>
+              <line class="chart__grid" x1="32" x2="440" y1="77.5" y2="77.5"/>
+              <line class="chart__base" x1="32" x2="440" y1="110.5" y2="110.5"/>
+              <text class="chart__axis chart__axis--end" x="24" y="14">450</text>
+              <text class="chart__axis chart__axis--end" x="24" y="47">300</text>
+              <text class="chart__axis chart__axis--end" x="24" y="81">150</text>
+              <text class="chart__axis chart__axis--end" x="24" y="114">0</text>
+            </g>
+            <g>
+              <rect class="chart__bar" x="38" y="101.1" width="22" height="7.9"/>
+              <rect class="chart__bar chart__bar--2" x="38" y="74.4" width="22" height="25.7"/>
+              <rect class="chart__bar chart__bar--3" x="38" y="67.8" width="22" height="5.7"/>
+              <rect class="chart__bar" x="72" y="98.9" width="22" height="10.1"/>
+              <rect class="chart__bar chart__bar--2" x="72" y="63.3" width="22" height="34.6"/>
+              <rect class="chart__bar chart__bar--3" x="72" y="55.8" width="22" height="6.6"/>
+              <rect class="chart__bar" x="106" y="101.1" width="22" height="7.9"/>
+              <rect class="chart__bar chart__bar--2" x="106" y="76.7" width="22" height="23.4"/>
+              <rect class="chart__bar chart__bar--3" x="106" y="71.8" width="22" height="3.9"/>
+              <rect class="chart__bar" x="140" y="103.3" width="22" height="5.7"/>
+              <rect class="chart__bar chart__bar--2" x="140" y="90.0" width="22" height="12.3"/>
+              <rect class="chart__bar chart__bar--3" x="140" y="86.0" width="22" height="3.0"/>
+              <rect class="chart__bar" x="174" y="102.0" width="22" height="7.0"/>
+              <rect class="chart__bar chart__bar--2" x="174" y="90.9" width="22" height="10.1"/>
+              <rect class="chart__bar chart__bar--3" x="174" y="86.4" width="22" height="3.4"/>
+              <rect class="chart__bar" x="208" y="96.7" width="22" height="12.3"/>
+              <rect class="chart__bar chart__bar--2" x="208" y="81.1" width="22" height="14.6"/>
+              <rect class="chart__bar chart__bar--3" x="208" y="75.3" width="22" height="4.8"/>
+              <rect class="chart__bar" x="242" y="90.0" width="22" height="19.0"/>
+              <rect class="chart__bar chart__bar--2" x="242" y="72.2" width="22" height="16.8"/>
+              <rect class="chart__bar chart__bar--3" x="242" y="65.6" width="22" height="5.7"/>
+              <rect class="chart__bar" x="276" y="76.7" width="22" height="32.3"/>
+              <rect class="chart__bar chart__bar--2" x="276" y="50.0" width="22" height="25.7"/>
+              <rect class="chart__bar chart__bar--3" x="276" y="42.4" width="22" height="6.6"/>
+              <rect class="chart__hover" x="306" y="6" width="30" height="104.5" rx="3"/>
+              <rect class="chart__bar" x="310" y="62.9" width="22" height="46.1"/>
+              <rect class="chart__bar chart__bar--2" x="310" y="30.4" width="22" height="31.4"/>
+              <rect class="chart__bar chart__bar--3" x="310" y="22.0" width="22" height="7.4"/>
+              <rect class="chart__bar" x="344" y="67.8" width="22" height="41.2"/>
+              <rect class="chart__bar chart__bar--2" x="344" y="34.4" width="22" height="32.3"/>
+              <rect class="chart__bar chart__bar--3" x="344" y="27.8" width="22" height="5.7"/>
+              <rect class="chart__bar" x="378" y="74.4" width="22" height="34.6"/>
+              <rect class="chart__bar chart__bar--2" x="378" y="50.0" width="22" height="23.4"/>
+              <rect class="chart__bar chart__bar--3" x="378" y="44.7" width="22" height="4.3"/>
+              <rect class="chart__bar" x="412" y="85.6" width="22" height="23.4"/>
+              <rect class="chart__bar chart__bar--2" x="412" y="70.0" width="22" height="14.6"/>
+              <rect class="chart__bar chart__bar--3" x="412" y="66.4" width="22" height="2.6"/>
+            </g>
+            <g><text class="chart__axis chart__axis--mid" x="49" y="128">8</text><text class="chart__axis chart__axis--mid" x="151" y="128">11</text><text class="chart__axis chart__axis--mid" x="253" y="128">14</text><text class="chart__axis chart__axis--mid" x="355" y="128">17</text></g>
+          </svg>
+          <div class="legend"><span class="legend__item"><span class="legend__sw"></span>From emails</span><span class="legend__item"><span class="legend__sw legend__sw--2"></span>Program page</span><span class="legend__item"><span class="legend__sw legend__sw--3"></span>QR</span></div>
+          <div class="chart-tip" role="tooltip"><span class="chart-tip__title">16:00 – 17:00</span><span class="chart-tip__row"><span class="legend__sw"></span>Emails<b>212</b></span><span class="chart-tip__row"><span class="legend__sw legend__sw--2"></span>Page<b>146</b></span><span class="chart-tip__row"><span class="legend__sw legend__sw--3"></span>QR<b>38</b></span></div>
+        </div>
+
+        <div class="panel sparks">
+          <div class="spark">
+            <span class="spark__label">Tickets sold · 7 days</span>
+            <div class="spark__num"><div class="spark__value">214</div><span class="spark__delta">+12 %</span></div>
+            <svg viewBox="0 0 120 32" aria-hidden="true"><path class="chart__area" d="M0 26 L20 22 L40 24 L60 16 L80 18 L100 8 L120 6 L120 32 L0 32Z"/><path class="chart__line" d="M0 26 L20 22 L40 24 L60 16 L80 18 L100 8 L120 6"/><circle class="chart__dot" cx="120" cy="6" r="3"/></svg>
+          </div>
+          <div class="spark">
+            <span class="spark__label">Notices sent · 7 days</span>
+            <div class="spark__num"><div class="spark__value">1,086</div><span class="spark__delta spark__delta--down">−4 %</span></div>
+            <svg viewBox="0 0 120 32" aria-hidden="true"><path class="chart__area" d="M0 10 L20 14 L40 8 L60 16 L80 14 L100 20 L120 18 L120 32 L0 32Z"/><path class="chart__line" d="M0 10 L20 14 L40 8 L60 16 L80 14 L100 20 L120 18"/><circle class="chart__dot" cx="120" cy="18" r="3"/></svg>
+          </div>
+        </div>
+
+        <div class="panel chart-panel">
+          <div class="chart-panel__head"><span class="chart-panel__title">Screens · 24 h</span><div class="legend"><span class="legend__item"><span class="legend__sw"></span>Showing</span><span class="legend__item"><span class="legend__sw legend__sw--warn"></span>Partial</span><span class="legend__item"><span class="legend__sw legend__sw--err"></span>Delayed</span><span class="legend__item"><span class="legend__sw legend__sw--none"></span>Dark</span></div></div>
+          <div class="uptime">
+          <div class="uptime__row"><span class="uptime__name">Screen 1</span><div class="uptime__strip"><i></i><i></i><i></i><i data-s="none"></i><i data-s="none"></i><i data-s="none"></i><i data-s="none"></i><i data-s="none"></i><i data-s="none"></i><i data-s="none"></i><i data-s="none"></i><i data-s="none"></i><i data-s="none"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="uptime__pct">99.9 %</span></div>
+          <div class="uptime__row"><span class="uptime__name">Screen 2</span><div class="uptime__strip"><i></i><i></i><i></i><i data-s="none"></i><i data-s="none"></i><i data-s="none"></i><i data-s="none"></i><i data-s="none"></i><i data-s="none"></i><i data-s="none"></i><i data-s="none"></i><i data-s="none"></i><i data-s="none"></i><i></i><i></i><i></i><i></i><i data-s="warn"></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="uptime__pct">99.6 %</span></div>
+          <div class="uptime__row"><span class="uptime__name">Screen 3</span><div class="uptime__strip"><i></i><i></i><i></i><i data-s="none"></i><i data-s="none"></i><i data-s="none"></i><i data-s="none"></i><i data-s="none"></i><i data-s="none"></i><i data-s="none"></i><i data-s="none"></i><i data-s="none"></i><i data-s="none"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i data-s="warn"></i><i data-s="down"></i><i></i><i></i></div><span class="uptime__pct">96.1 %</span></div>
+          <div class="uptime__row"><span class="uptime__name">Booth test</span><div class="uptime__strip"><i></i><i></i><i></i><i data-s="none"></i><i data-s="none"></i><i data-s="none"></i><i data-s="none"></i><i data-s="none"></i><i data-s="none"></i><i data-s="none"></i><i data-s="none"></i><i data-s="none"></i><i data-s="none"></i><i></i><i></i><i></i><i data-s="warn"></i><i></i><i></i><i></i><i></i><i></i><i data-s="warn"></i><i data-s="down"></i></div><span class="uptime__pct">87.5 %</span></div>
+          <div class="uptime__axis"><span></span><div><span>22:00</span><span>04:00</span><span>10:00</span><span>16:00</span><span>now</span></div><span></span></div>
+        </div>
+        </div>
+      </div>
+    </section>
+    </div>
+  </div>
+
+</main>
+<script>
+  /* Mode toggle (also works in the static render: reads data-mode on load). */
+  (function () {
+    var root = document.documentElement, seg = document.getElementById('modo');
+    function sync() { seg.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.set === (root.dataset.mode || 'light'))); }); }
+    seg.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) { root.dataset.mode = b.dataset.set; sync(); } });
+    sync();
+  })();
+</script>
+</body>
+</html>

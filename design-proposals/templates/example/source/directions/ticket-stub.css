@@ -1,0 +1,96 @@
+/* «Ticket Stub» · cream stock, black ink, monospace times, perforated edges as a detail. No photos.
+   Signature: a perforated edge where you would tear, and every time printed in IBM Plex Mono. */
+
+[data-dir="ticket-stub"] { --perf: radial-gradient(circle at 50% 50%, var(--background) 3.5px, transparent 4px); }
+[data-dir="ticket-stub"] .eyebrow,
+[data-dir="ticket-stub"] .detail-h,
+[data-dir="ticket-stub"] .sess th { font-family: var(--font-mono); letter-spacing: 0.04em; }
+[data-dir="ticket-stub"] .detail-photo,
+[data-dir="ticket-stub"] .m-photo,
+[data-dir="ticket-stub"] .tv-photo { display: none; }
+
+/* Dashboard: dense, everything on one sheet */
+[data-dir="ticket-stub"] .app { grid-template-columns: 200px minmax(0, 1fr) 340px; }
+[data-dir="ticket-stub"] .side { padding: 12px 10px; gap: 14px; }
+[data-dir="ticket-stub"] .brand-name { text-transform: uppercase; letter-spacing: 0.08em; font-size: 15px; font-weight: 700; }
+[data-dir="ticket-stub"] .brand-mark { background: var(--foreground); color: var(--background); }
+[data-dir="ticket-stub"] .nav a, [data-dir="ticket-stub"] .side-foot > a { height: 30px; }
+[data-dir="ticket-stub"] .top { height: 48px; padding: 0 20px; border-bottom: 1px dashed var(--input); }
+[data-dir="ticket-stub"] .board { padding: 18px 20px; gap: 18px; }
+[data-dir="ticket-stub"] .page-title { font-size: 26px; text-transform: uppercase; letter-spacing: 0.01em; }
+[data-dir="ticket-stub"] .board-sum { font-family: var(--font-mono); font-size: var(--text-xs); }
+[data-dir="ticket-stub"] .tl { gap: 4px; }
+[data-dir="ticket-stub"] .tl-lane { min-height: 68px; }
+[data-dir="ticket-stub"] .tl-track { background: transparent; border-radius: 0;
+  background-image: repeating-linear-gradient(to right, var(--border) 0 1px, transparent 1px calc(100% / 4)); border-bottom: 1px dashed var(--input); }
+[data-dir="ticket-stub"] .scr-num { background: var(--foreground); color: var(--background); border-color: var(--foreground); }
+[data-dir="ticket-stub"] .slot { border: 1px solid var(--foreground); border-left: 2px dashed var(--foreground); border-radius: 0; background: var(--card); }
+[data-dir="ticket-stub"] .slot.is-ended { border-color: var(--input); border-style: dashed; background: transparent; }
+[data-dir="ticket-stub"] .slot.is-selected { background: var(--primary); border-color: var(--primary); border-left-style: dashed; }
+[data-dir="ticket-stub"] .slot-title { font-size: var(--text-xs); }
+[data-dir="ticket-stub"] .section-title { font-size: var(--text-sm); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; }
+[data-dir="ticket-stub"] .sess td { border-bottom: 1px dashed var(--border); font-size: var(--text-sm); }
+[data-dir="ticket-stub"] .sess .c-scr { font-family: var(--font-mono); font-size: var(--text-xs); }
+[data-dir="ticket-stub"] .sess td.c-time { font-weight: 600; }
+[data-dir="ticket-stub"] .sess tr.is-selected td { background: var(--card); }
+[data-dir="ticket-stub"] .sess tr.is-selected td:first-child { box-shadow: inset 3px 0 0 var(--primary); color: var(--accent-ink); }
+[data-dir="ticket-stub"] .occ { border-radius: 0; height: 8px; background: transparent; border: 1px solid var(--input); }
+[data-dir="ticket-stub"] .occ i { border-radius: 0; }
+[data-dir="ticket-stub"] .badge { border-radius: 0; background: transparent; padding: 0; height: 20px; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.02em; }
+
+/* Detail panel: a stub with a perforated left edge */
+[data-dir="ticket-stub"] .detail { position: relative; margin: 18px 18px 18px 0; border: 1px solid var(--foreground); border-left: 0; }
+[data-dir="ticket-stub"] .detail::before { content: ''; position: absolute; left: -5px; top: 0; bottom: 0; width: 10px;
+  background: var(--perf) 0 0 / 10px 14px repeat-y; }
+[data-dir="ticket-stub"] .detail::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; border-left: 1px dashed var(--foreground); }
+[data-dir="ticket-stub"] .detail-body { padding: 20px 22px; gap: 10px; }
+[data-dir="ticket-stub"] .detail-kicker { font-family: var(--font-mono); }
+[data-dir="ticket-stub"] .film-title { font-size: 34px; text-transform: uppercase; }
+[data-dir="ticket-stub"] .film-meta { font-family: var(--font-mono); font-size: var(--text-xs); }
+[data-dir="ticket-stub"] .facts { border-top: 1px dashed var(--input); }
+[data-dir="ticket-stub"] .facts > div { border-bottom: 1px dashed var(--border); padding: 5px 0; }
+[data-dir="ticket-stub"] .facts dd { font-family: var(--font-mono); font-size: var(--text-xs); }
+[data-dir="ticket-stub"] .today li { border-radius: 0; height: 30px; border-bottom: 1px dashed var(--border); }
+[data-dir="ticket-stub"] .today li.is-selected { background: var(--muted); }
+[data-dir="ticket-stub"] .detail-actions { padding-top: 14px; border-top: 1px dashed var(--foreground); }
+
+/* Phone: the ticket is the screen */
+[data-dir="ticket-stub"] .m-top { border-bottom: 1px dashed var(--input); }
+[data-dir="ticket-stub"] .m-top-title { text-transform: uppercase; letter-spacing: 0.06em; font-size: var(--text-sm); font-weight: 700; }
+[data-dir="ticket-stub"] .m-film { grid-template-columns: 1fr; margin: 16px 16px 0; padding: 14px 16px; background: var(--card); border: 1px solid var(--foreground); }
+[data-dir="ticket-stub"] .m-title { font-size: 30px; text-transform: uppercase; }
+[data-dir="ticket-stub"] .m-meta { font-family: var(--font-mono); font-size: var(--text-xs); }
+[data-dir="ticket-stub"] .m-seats { margin: 0 16px; background: var(--card); border: 1px solid var(--foreground); border-top: 0; padding: 14px 12px 16px; }
+[data-dir="ticket-stub"] .screen-line::before { border-radius: 0; height: 2px; width: 88%; }
+[data-dir="ticket-stub"] .seat { border-radius: 1px; border-color: var(--foreground); border-width: 1px; background: var(--card); }
+[data-dir="ticket-stub"] .seat.is-taken { background: var(--foreground); border-color: var(--foreground); opacity: 0.22; }
+[data-dir="ticket-stub"] .seat.is-sel { background: var(--primary); border-color: var(--primary); }
+[data-dir="ticket-stub"] .legend { font-family: var(--font-mono); }
+[data-dir="ticket-stub"] .m-sum { position: relative; margin: 0 16px; padding: 16px 16px 14px; background: var(--card);
+  border: 1px solid var(--foreground); border-top: 0; }
+[data-dir="ticket-stub"] .m-sum::before { content: ''; position: absolute; left: 0; right: 0; top: -1px; border-top: 1px dashed var(--foreground); }
+[data-dir="ticket-stub"] .m-sum::after { content: ''; position: absolute; left: -9px; right: -9px; top: -9px; height: 18px;
+  background: radial-gradient(circle at 9px 9px, var(--background) 8px, transparent 8.5px) left / 18px 18px no-repeat,
+              radial-gradient(circle at 9px 9px, var(--background) 8px, transparent 8.5px) right / 18px 18px no-repeat; }
+[data-dir="ticket-stub"] .m-sum-row { font-family: var(--font-mono); font-size: var(--text-sm); }
+[data-dir="ticket-stub"] .m-total { font-family: var(--font-sans); font-size: var(--text-md); font-weight: 700; text-transform: uppercase; }
+[data-dir="ticket-stub"] .m-pay { padding: 16px 16px 28px; }
+
+/* Lobby: a printed board, each session a stub */
+[data-dir="ticket-stub"] .tv-main { padding: 54px 96px; gap: 22px; }
+[data-dir="ticket-stub"] .tv-brand { text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; font-size: 32px; }
+[data-dir="ticket-stub"] .tv-title { font-size: 112px; text-transform: uppercase; font-weight: 700; letter-spacing: -0.01em; }
+[data-dir="ticket-stub"] .tv-list { gap: 12px; border: 0; }
+[data-dir="ticket-stub"] .tv-row { position: relative; height: 112px; padding: 0 0 0 32px; gap: 32px; border: 2px solid var(--foreground);
+  background: var(--card); grid-template-columns: 160px minmax(0, 1fr) 190px 280px; }
+[data-dir="ticket-stub"] .tv-status { justify-self: stretch; height: 100%; padding-left: 32px; border-left: 3px dashed var(--foreground); font-family: var(--font-mono); text-transform: uppercase; font-size: 30px; }
+[data-dir="ticket-stub"] .tv-status::before { border-radius: 0; }
+[data-dir="ticket-stub"] .tv-time { font-size: 52px; font-weight: 600; }
+[data-dir="ticket-stub"] .tv-name { font-size: 44px; font-weight: 700; text-transform: uppercase; letter-spacing: 0; }
+[data-dir="ticket-stub"] .tv-meta { font-family: var(--font-mono); }
+[data-dir="ticket-stub"] .tv-screen b { display: inline-grid; place-items: center; width: 72px; height: 72px; border: 2px solid var(--foreground); font-size: 44px; }
+[data-dir="ticket-stub"] .tv-row.is-sold { background: transparent; border-style: dashed; }
+[data-dir="ticket-stub"] .tv-row.is-sold .tv-name { text-decoration: line-through; text-decoration-thickness: 3px; }
+[data-dir="ticket-stub"] .tv-now { font-family: var(--font-mono); }
+[data-dir="ticket-stub"] .tv-live { border-radius: 0; background: var(--primary); }
+[data-dir="ticket-stub"] .tv-foot { font-family: var(--font-mono); }
